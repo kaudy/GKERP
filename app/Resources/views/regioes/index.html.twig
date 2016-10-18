@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div>
+        <a class="btn btn-primary pull-right" href="{{ path('regioes_new') }}">Cadastrar Novo</a>    
+        <h1>Listagem de Regiões</h1>
+    </div>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Codigo</th>
+                <th>Região</th>               
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for regiao in regioes %}
+                <tr>
+                    <td><a href="{{ path('regioes_show', { 'id': regiao.id }) }}">{{ regiao.id }}</a></td>
+                    <td>{{ regiao.regiao|upper }}</td>              
+                    <td>
+                        <a class="btn btn-info" href="{{ path('regioes_edit', {'id': regiao.id}) }}" ><span class="glyphicon glyphicon-cog"></span></a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

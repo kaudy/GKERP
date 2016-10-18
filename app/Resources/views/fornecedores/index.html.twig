@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div>
+        <a class="btn btn-primary pull-right" href="{{ path('fornecedores_new') }}">Novo Fornecedor</a>
+        <a class="btn btn-success pull-right" href="{{ path('contatosfornecedores_new') }}">Novo Contato Fornecedor</a>        
+        <h2>Fornecedores</h2>
+    </div>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Código</th>
+                <th>CNPJ</th>
+                <th>Razão Social</th>
+                <th>Nome Fantasia</th>
+                <th>Inscrição Estadual</th>                
+                <th>Cidade</th>
+                <th>Estado</th>
+                <th>Data de Cadastro</th>
+                <th>Ativo</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for fornecedor in fornecedores %}
+            <tr>
+                <td><a href="{{ path('fornecedores_show', { 'id': fornecedor.id }) }}">{{ fornecedor.id }}</a></td>
+                <td>{{ fornecedor.cnpj }}</td>
+                <td>{{ fornecedor.razaoSocial }}</td>
+                <td>{{ fornecedor.nomeFantasia }}</td>
+                <td>{{ fornecedor.inscricaoEstatual }}</td>
+                <td>{{ fornecedor.cidade }}</td>
+                <td>{{ fornecedor.estado }}</td>                            
+                <td>{% if fornecedor.dataCadastro %}{{ fornecedor.dataCadastro|date('d/m/Y H:i:s') }}{% endif %}</td>
+                <td>{{ fornecedor.ativo }}</td>
+                <td>
+                    <a class="btn btn-info" href="{{ path('fornecedores_edit', {'id': fornecedor.id}) }}" >
+                        <span class="glyphicon glyphicon-cog"></span>
+                    </a>                    
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>   
+{% endblock %}

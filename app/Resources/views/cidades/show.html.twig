@@ -1,0 +1,49 @@
+{% extends 'base.html.twig' %}
+{% block body %}  
+    <div>           
+        <h3>Cidade #{{ cidade.id }}</h3>
+    </div>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Código</th>
+                <th>Cidade</th>
+                <th>Estado</th>  
+                <th>UF</th>
+                <th>Região</th>
+                <th>Tipo</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>                   
+                    {{ cidade.id }}                    
+                </td>
+                <td>
+                    {{ cidade.cidade|upper }}
+                </td>
+                <td>
+                    {{ cidade.idEstado }}
+                </td>  
+                <td>
+                    {{ cidade.idEstado.uf }}
+                </td>
+                <td>
+                    {{ cidade.idEstado.idRegiao }}
+                </td>
+                <td>
+                    {{ cidade.idTipoCidade }}
+                </td>  
+                <td>
+                    <a class="btn btn-info" href="{{ path('cidades_edit', {'id': cidade.id}) }}" >
+                        <span class="glyphicon glyphicon-cog"></span>
+                    </a>
+                </td>
+            </tr>           
+        </tbody>
+    </table>
+    <div>
+        <a href="{{ path('regioes_index') }}"  class="btn btn-success"> Retornar</a>
+    </div>
+{% endblock %}

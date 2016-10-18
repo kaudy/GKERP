@@ -1,3 +1,19 @@
+fabricantes:
+    resource: "@FabricantesBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
+fornecedores:
+    resource: "@FornecedoresBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
+cidades:
+    resource: "@CidadesBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
+
 app:
     resource: "@AppBundle/Controller/"
     type:     annotation

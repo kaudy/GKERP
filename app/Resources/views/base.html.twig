@@ -3,11 +3,221 @@
     <head>
         <meta charset="UTF-8" />
         <title>{% block title %}Welcome!{% endblock %}</title>
-        {% block stylesheets %}{% endblock %}
+        <link rel="stylesheet" href="{{ asset('css/bootstrap.css') }}" />
+        <script type="text/javascript" src="{{ asset('js/jquery-3.1.1.min.js') }}" ></script> 
+        <script type="text/javascript" src="{{ asset('js/bootstrap.js') }}" ></script> 
+
+        {% block stylesheets %}
+            <style>             
+                #accordion .glyphicon { margin-right:10px; }
+                .panel-collapse>.list-group .list-group-item:first-child {border-top-right-radius: 0;border-top-left-radius: 0;}
+                .panel-collapse>.list-group .list-group-item {border-width: 1px 0;}
+                .panel-collapse>.list-group {margin-bottom: 0;}
+                .panel-collapse .list-group-item {border-radius:0;}
+
+                .panel-collapse .list-group .list-group {margin: 0;margin-top: 10px;}
+                .panel-collapse .list-group-item li.list-group-item {margin: 0 -15px;border-top: 1px solid #ddd !important;border-bottom: 0;padding-left: 30px;}
+                .panel-collapse .list-group-item li.list-group-item:last-child {padding-bottom: 0;}
+
+                .panel-collapse div.list-group div.list-group{margin: 0;}
+                .panel-collapse div.list-group .list-group a.list-group-item {border-top: 1px solid #ddd !important;border-bottom: 0;padding-left: 30px;}
+                .panel-collapse .list-group-item li.list-group-item {border-top: 1px solid #DDD !important;}
+            </style>
+        {% endblock %}
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+
     </head>
     <body>
-        {% block body %}{% endblock %}
-        {% block javascripts %}{% endblock %}
+        <nav class="navbar navbar-inverse navbar-static-top">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="#">GK ERP</a>
+                </div>
+                <div id="navbar" class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav navbar-right">           
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Fabricante<span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li>Cadastrar Novo</li>
+                                <li>Cadastrar Novo</li>
+                            </ul>           
+                        </li>
+                        <li><a href="#">Frente de Caixa</a></li>
+                        <li><a href="#">Frente de Caixa</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-sm-2 col-md-2">
+                    <!--+++++++++++++++++++++++++++++++++++++++++++++++++++++-->
+                    <!-- Painel Administrativo -------------------------------->
+                    <div class="panel-group" id="accordion">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h4 class="panel-title">
+                                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseAdministrativo"><span class="glyphicon glyphicon-folder-close">
+                                        </span>Administrativo</a>
+                                </h4>
+                            </div>                            
+                            <div id="collapseAdministrativo" class="panel-collapse collapse in">
+                                <div class="list-group">
+                                    <!--+++++++++++++++++++++++++++++++++++++-->
+                                    <!-- Painel Cidades e Estados ------------->
+                                    <div class=" list-group-item" id="accordionCidades">
+                                        <div class="panel panel-group">
+                                            <div class="panel-heading">
+                                                <h4 class="panel-title">
+                                                    <a data-toggle="collapse" data-parent="#accordionCidades" href="#collapseCidades">
+                                                        <span class="glyphicon glyphicon-chevron-right">
+                                                        </span>
+                                                        Cidades e Estados
+                                                    </a>
+                                                </h4>
+                                            </div>
+                                            <div id="collapseCidades" class="panel-collapse collapse">
+                                                <ul class="list-group">
+                                                    <li class="list-group-item">
+                                                        <span class="glyphicon glyphicon-pencil text-primary"></span><a href="{{ path('cidades_index') }}">Cidades</a>
+                                                    </li>
+                                                    <li class="list-group-item">
+                                                        <span class="glyphicon glyphicon-pencil text-primary"></span><a href="{{ path('estados_index') }}">Estados</a>
+                                                    </li>
+                                                    <li class="list-group-item">
+                                                        <span class="glyphicon glyphicon-pencil text-primary"></span><a href="{{ path('regioes_index') }}">Regiões</a>
+                                                    </li>
+                                                    <li class="list-group-item">
+                                                        <span class="glyphicon glyphicon-pencil text-primary"></span><a href="{{ path('tiposcidades_index') }}">Tipos de Cidades</a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--+++++++++++++++++++++++++++++++++++++-->
+                                    <!-- Painel Fornecedores ------------------>
+                                    <div class=" list-group-item" id="accordionFornecedores">
+                                        <div class="panel panel-group">
+                                            <div class="panel-heading">
+                                                <h4 class="panel-title">
+                                                    <a href="{{ path('fornecedores_index') }}">
+                                                        <span class="glyphicon glyphicon-chevron-right">
+                                                        </span>
+                                                        Fornecedores
+                                                    </a>
+                                                </h4>
+                                            </div>                                            
+                                        </div>
+                                    </div>
+                                    <!--+++++++++++++++++++++++++++++++++++++-->
+                                    <!-- Painel Fabricantes ------------------->
+                                    <div class=" list-group-item" id="accordionFabricantes">
+                                        <div class="panel panel-group">
+                                            <div class="panel-heading">
+                                                <h4 class="panel-title">
+                                                    <a href="{{ path('fabricantes_index') }}">
+                                                        <span class="glyphicon glyphicon-chevron-right">
+                                                        </span>
+                                                        Fabricantes
+                                                    </a>
+                                                </h4>
+                                            </div>                                            
+                                        </div>
+                                    </div>
+                                    <!--+++++++++++++++++++++++++++++++++++++-->
+                                    <!-- Painel  ------------------>
+                                    <div class=" list-group-item" id="accordionVazio">
+                                        <div class="panel panel-group">
+                                            <div class="panel-heading">
+                                                <h4 class="panel-title">
+                                                    <a data-toggle="collapse" data-parent="#accordionVazio" href="#collapseFornecedores"><span class="glyphicon glyphicon-chevron-right">
+                                                        </span>Vazio</a>
+                                                </h4>
+                                            </div>
+                                            <div id="collapseFornecedores" class="panel-collapse collapse">
+                                                <ul class="list-group">
+                                                    <li class="list-group-item">
+                                                        <span class="glyphicon glyphicon-pencil text-primary"></span><a href="#">Fornecedor</a>
+                                                    </li>                                                    
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--+++++++++++++++++++++++++++++++++++++-->                                    
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h4 class="panel-title">
+                                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseFour"><span class="glyphicon glyphicon-file">
+                                        </span>Reports</a>
+                                </h4>
+                            </div>
+                            <div id="collapseFour" class="panel-collapse collapse">
+                                <div class="list-group">
+                                    <a href="#" class="list-group-item">
+                                        Cras justo odio
+                                    </a>
+                                    <div class="list-group">
+                                        <a href="#" class="list-group-item">
+                                            Cras justo odio
+                                        </a>
+                                        <a href="#" class="list-group-item">Dapibus ac facilisis in</a>
+                                        <a href="#" class="list-group-item">Morbi leo risus</a>
+                                        <a href="#" class="list-group-item">Porta ac consectetur ac</a>
+                                        <a href="#" class="list-group-item">Vestibulum at eros</a>
+                                    </div>
+                                    <a href="#" class="list-group-item">Dapibus ac facilisis in</a>
+                                    <a href="#" class="list-group-item">Morbi leo risus</a>
+                                    <a href="#" class="list-group-item">Porta ac consectetur ac</a>
+                                    <a href="#" class="list-group-item">Vestibulum at eros</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h4 class="panel-title">
+                                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseFive"><span class="glyphicon glyphicon-heart">
+                                        </span>Reports</a>
+                                </h4>
+                            </div>
+                            <div id="collapseFive" class="panel-collapse collapse">
+                                <div class="list-group">
+                                    <a href="#" class="list-group-item">
+                                        <h4 class="list-group-item-heading">List group item heading</h4>
+                                        <p class="list-group-item-text">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
+                                    </a>
+                                </div>
+                                <div class="list-group">
+                                    <a href="#" class="list-group-item active">
+                                        <h4 class="list-group-item-heading">List group item heading</h4>
+                                        <p class="list-group-item-text">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
+                                    </a>
+                                </div>
+                                <div class="list-group">
+                                    <a href="#" class="list-group-item">
+                                        <h4 class="list-group-item-heading">List group item heading</h4>
+                                        <p class="list-group-item-text">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-10 col-md-10">
+                    <div class="panel panel-default">
+                        {% block body %}{% endblock %}
+                    </div>
+                </div>
+            </div> 
+        </div>
+{% block javascripts %}{% endblock %}
     </body>
 </html>

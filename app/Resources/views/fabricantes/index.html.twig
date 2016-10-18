@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Fabricantes list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Fabricante</th>
+                <th>Usuariocadastro</th>
+                <th>Datacadastro</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for fabricante in fabricantes %}
+            <tr>
+                <td><a href="{{ path('fabricantes_show', { 'id': fabricante.id }) }}">{{ fabricante.id }}</a></td>
+                <td>{{ fabricante.fabricante }}</td>
+                <td>{{ fabricante.usuarioCadastro }}</td>
+                <td>{% if fabricante.dataCadastro %}{{ fabricante.dataCadastro|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('fabricantes_show', { 'id': fabricante.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('fabricantes_edit', { 'id': fabricante.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('fabricantes_new') }}">Create a new fabricante</a>
+        </li>
+    </ul>
+{% endblock %}

@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Fabricante</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ fabricante.id }}</td>
+            </tr>
+            <tr>
+                <th>Fabricante</th>
+                <td>{{ fabricante.fabricante }}</td>
+            </tr>
+            <tr>
+                <th>Usuariocadastro</th>
+                <td>{{ fabricante.usuarioCadastro }}</td>
+            </tr>
+            <tr>
+                <th>Datacadastro</th>
+                <td>{% if fabricante.dataCadastro %}{{ fabricante.dataCadastro|date('Y-m-d H:i:s') }}{% endif %}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('fabricantes_index') }}">Back to the list</a>
+        </li>
+        <li>
+            <a href="{{ path('fabricantes_edit', { 'id': fabricante.id }) }}">Edit</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}

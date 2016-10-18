@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div>           
+        <h3>Tipo de Cidade #{{ tiposCidade.id }}</h3>
+    </div>    
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Código</th>
+                <th>Tipo de Cidade</th>                
+                <th>Ação</th>
+            </tr>
+        </thead>
+        <tbody>           
+            <tr>
+                <td>
+                    <a href="{{ path('tiposcidades_show', { 'id': tiposCidade.id }) }}">
+                        {{ tiposCidade.id }}
+                    </a>
+                </td>
+                <td>
+                    {{ tiposCidade.tipo|upper }}
+                </td>                  
+                <td>
+                    <a class="btn btn-info" href="{{ path('tiposcidades_edit', {'id': tiposCidade.id}) }}" >
+                        <span class="glyphicon glyphicon-cog"></span>
+                    </a>
+                </td>
+            </tr>            
+        </tbody>
+    </table>
+    <div>
+        <a href="{{ path('tiposcidades_index') }}"  class="btn btn-success"> Retornar</a>
+    </div>
+{% endblock %}

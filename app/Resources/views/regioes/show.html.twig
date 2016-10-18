@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Região</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Código: </th>
+                <td>{{ regioes.id }}</td>
+            </tr>
+            <tr>
+                <th>Região: </th>
+                <td>{{ regioes.regiao }}</td>
+            </tr>
+        </tbody>
+    </table>
+    <br>                
+    <a href="{{ path('regioes_index') }}"  class="btn btn-success"> Retornar</a>
+    <a href="{{ path('regioes_edit', { 'id': regioes.id }) }}"  class="btn btn-info"> Editar</a>
+{% endblock %}

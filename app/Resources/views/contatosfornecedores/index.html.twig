@@ -1,0 +1,51 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Contatosfornecedores list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Contato</th>
+                <th>Ddd</th>
+                <th>Telefone</th>
+                <th>Email</th>
+                <th>Usuariocadastro</th>
+                <th>Datacadastro</th>
+                <th>Ativo</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for contatosFornecedore in contatosFornecedores %}
+            <tr>
+                <td><a href="{{ path('contatosfornecedores_show', { 'id': contatosFornecedore.id }) }}">{{ contatosFornecedore.id }}</a></td>
+                <td>{{ contatosFornecedore.contato }}</td>
+                <td>{{ contatosFornecedore.ddd }}</td>
+                <td>{{ contatosFornecedore.telefone }}</td>
+                <td>{{ contatosFornecedore.email }}</td>
+                <td>{{ contatosFornecedore.usuarioCadastro }}</td>
+                <td>{% if contatosFornecedore.dataCadastro %}{{ contatosFornecedore.dataCadastro|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{{ contatosFornecedore.ativo }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('contatosfornecedores_show', { 'id': contatosFornecedore.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('contatosfornecedores_edit', { 'id': contatosFornecedore.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('contatosfornecedores_new') }}">Create a new contatosFornecedore</a>
+        </li>
+    </ul>
+{% endblock %}

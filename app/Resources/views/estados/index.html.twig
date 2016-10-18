@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div>
+        <a class="btn btn-primary pull-right" href="{{ path('estados_new') }}">Cadastrar Novo</a>    
+        <h1>Listagem de Estados</h1>
+    </div>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Codigo</th>
+                <th>Estado</th>
+                <th>UF</th>
+                <th>Região</th>  
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for estado in estados %}
+                <tr>
+                    <td><a href="{{ path('estados_show', { 'id': estado.id }) }}">{{ estado.id }}</a></td>
+                    <td>{{ estado.estado|upper }}</td>
+                    <td>{{ estado.uf }}</td>
+                    <td>{{ estado.idRegiao|upper }}</td>                    
+                    <td>
+                        <a class="btn btn-info" href="{{ path('estados_edit', {'id': estado.id}) }}" ><span class="glyphicon glyphicon-cog"></span></a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
