@@ -3,7 +3,7 @@
 {% block body %}
     <div>
         <a class="btn btn-primary pull-right" href="{{ path('estados_new') }}">Cadastrar Novo</a>    
-        <h1>Listagem de Estados</h1>
+        <h2>Listagem de Estados</h2>
     </div>
     <table class="table">
         <thead>
@@ -19,7 +19,7 @@
             {% for estado in estados %}
                 <tr>
                     <td><a href="{{ path('estados_show', { 'id': estado.id }) }}">{{ estado.id }}</a></td>
-                    <td>{{ estado.estado|upper }}</td>
+                    <td>{{ estado.estado }}</td>
                     <td>{{ estado.uf }}</td>
                     <td>{{ estado.idRegiao|upper }}</td>                    
                     <td>

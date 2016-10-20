@@ -43,17 +43,26 @@ class ContatosFornecedoresController extends Controller
         $form = $this->createForm('FornecedoresBundle\Form\ContatosFornecedoresType', $contatoFornecedor);
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid()) 
+            {
+            //usuario fixo - modificar quando implantar controle de usuarios
+            $contatoFornecedor->setUsuarioCadastro(1);
+            
+            //Pega a data e horario atual do cadastro
+            $dataAtual = new \DateTime("now");
+            $contatoFornecedor->setDataCadastro($dataAtual);
+            
             $em = $this->getDoctrine()->getManager();
             $em->persist($contatoFornecedor);
             $em->flush($contatoFornecedor);
 
-            return $this->redirectToRoute('fornecedores_index');
+            return $this->redirectToRoute('fornecedores_show', array('id' => $contatosFornecedor->getFornecedor()->getId()));
         }
 
         return $this->render('contatosfornecedores/new.html.twig', array(
             'contatoFornecedor' => $contatoFornecedor,
             'form' => $form->createView(),
+            'origem' => 'newAction',
         ));
     }
 
@@ -79,20 +88,20 @@ class ContatosFornecedoresController extends Controller
      * @Route("/{id}/edit", name="contatosfornecedores_edit")
      * @Method({"GET", "POST"})
      */
-    public function editAction(Request $request, ContatosFornecedores $contatosFornecedore)
+    public function editAction(Request $request, ContatosFornecedores $contatosFornecedor)
     {
-        $deleteForm = $this->createDeleteForm($contatosFornecedore);
-        $editForm = $this->createForm('FornecedoresBundle\Form\ContatosFornecedoresType', $contatosFornecedore);
+        $deleteForm = $this->createDeleteForm($contatosFornecedor);
+        $editForm = $this->createForm('FornecedoresBundle\Form\ContatosFornecedoresType', $contatosFornecedor);
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('contatosfornecedores_edit', array('id' => $contatosFornecedore->getId()));
+            return $this->redirectToRoute('fornecedores_show', array('id' => $contatosFornecedor->getFornecedor()->getId()));
         }
 
         return $this->render('contatosfornecedores/edit.html.twig', array(
-            'contatosFornecedore' => $contatosFornecedore,
+            'contatosFornecedor' => $contatosFornecedor,
             'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
         ));
@@ -133,4 +142,51 @@ class ContatosFornecedoresController extends Controller
             ->getForm()
         ;
     }
+    
+    
+     /**
+     * Cria um novo contatos para fornecedor que foi passado por parametro
+     *
+     * @Route("/{id}/new", name="contatosfornecedores_new_with_fornecedor")
+     * @Method({"GET", "POST"})
+     */
+    public function newWithFornecedorAction(Request $request, \FornecedoresBundle\Entity\Fornecedores $fornecedor)
+    {
+        $contatoFornecedor = new Contatosfornecedores();
+        $contatoFornecedor->setFornecedor($fornecedor);
+        $form = $this->createForm('FornecedoresBundle\Form\ContatosFornecedoresType', $contatoFornecedor);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) 
+        {
+            //usuario fixo - modificar quando implantar controle de usuarios
+            $contatoFornecedor->setUsuarioCadastro(1);
+            
+            //Pega a data e horario atual do cadastro
+            $dataAtual = new \DateTime("now");
+            $contatoFornecedor->setDataCadastro($dataAtual);                    
+                    
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($contatoFornecedor);
+            $em->flush($contatoFornecedor);
+
+            return $this->redirectToRoute('fornecedores_show', array('id' => $contatosFornecedor->getFornecedor()->getId()));
+        }
+
+        return $this->render('contatosfornecedores/new.html.twig', array(
+            'contatoFornecedor' => $contatoFornecedor,
+            'form' => $form->createView(),
+            'origem' => 'newWithFornecedorAction',
+        ));
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 }

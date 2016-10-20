@@ -58,14 +58,14 @@ class ContatosFornecedores
     /**
      * @var int
      *
-     * @ORM\Column(name="id_usuario_cadastro", type="integer")
+     * @ORM\Column(name="id_usuario_cadastro", type="integer" )
      */
     private $usuarioCadastro;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="data_cadastro", type="datetime")
+     * @ORM\Column(name="data_cadastro", type="datetime" )
      */
     private $dataCadastro;
 
@@ -277,6 +277,11 @@ class ContatosFornecedores
     public function getAtivo()
     {
         return $this->ativo;
+    }
+    
+    public function __toString()
+    {
+        return $this->getContato();
     }
 }
 

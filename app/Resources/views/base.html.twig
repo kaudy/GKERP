@@ -9,14 +9,14 @@
 
         {% block stylesheets %}
             <style>             
-                #accordion .glyphicon { margin-right:10px; }
+                #accordion .glyphicon { margin-right:5px; }
                 .panel-collapse>.list-group .list-group-item:first-child {border-top-right-radius: 0;border-top-left-radius: 0;}
                 .panel-collapse>.list-group .list-group-item {border-width: 1px 0;}
                 .panel-collapse>.list-group {margin-bottom: 0;}
                 .panel-collapse .list-group-item {border-radius:0;}
 
-                .panel-collapse .list-group .list-group {margin: 0;margin-top: 10px;}
-                .panel-collapse .list-group-item li.list-group-item {margin: 0 -15px;border-top: 1px solid #ddd !important;border-bottom: 0;padding-left: 30px;}
+                .panel-collapse .list-group .list-group {margin: 0;margin-top: 5px;}
+                .panel-collapse .list-group-item li.list-group-item {margin: 0 -15px;border-top: 1px solid #ddd !important;border-bottom: 0;padding-left: 15px;}
                 .panel-collapse .list-group-item li.list-group-item:last-child {padding-bottom: 0;}
 
                 .panel-collapse div.list-group div.list-group{margin: 0;}
@@ -25,7 +25,6 @@
             </style>
         {% endblock %}
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
-
     </head>
     <body>
         <nav class="navbar navbar-inverse navbar-static-top">
@@ -42,7 +41,7 @@
                 <div id="navbar" class="navbar-collapse collapse">
                     <ul class="nav navbar-nav navbar-right">           
                         <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Fabricante<span class="caret"></span></a>
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Vazio<span class="caret"></span></a>
                             <ul class="dropdown-menu">
                                 <li>Cadastrar Novo</li>
                                 <li>Cadastrar Novo</li>
@@ -56,18 +55,21 @@
         </nav>
         <div class="container-fluid">
             <div class="row">
-                <div class="col-sm-2 col-md-2">
+                <div class="col-md-2">
                     <!--+++++++++++++++++++++++++++++++++++++++++++++++++++++-->
                     <!-- Painel Administrativo -------------------------------->
                     <div class="panel-group" id="accordion">
                         <div class="panel panel-default">
                             <div class="panel-heading">
                                 <h4 class="panel-title">
-                                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseAdministrativo"><span class="glyphicon glyphicon-folder-close">
-                                        </span>Administrativo</a>
+                                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseAdministrativo">
+                                        <span class="glyphicon glyphicon-folder-close">
+                                        </span>
+                                        Administrativo
+                                    </a>
                                 </h4>
                             </div>                            
-                            <div id="collapseAdministrativo" class="panel-collapse collapse in">
+                            <div id="collapseAdministrativo" class="panel-collapse collapse">
                                 <div class="list-group">
                                     <!--+++++++++++++++++++++++++++++++++++++-->
                                     <!-- Painel Cidades e Estados ------------->
@@ -76,7 +78,7 @@
                                             <div class="panel-heading">
                                                 <h4 class="panel-title">
                                                     <a data-toggle="collapse" data-parent="#accordionCidades" href="#collapseCidades">
-                                                        <span class="glyphicon glyphicon-chevron-right">
+                                                        <span class="glyphicon glyphicon-chevron-right ">
                                                         </span>
                                                         Cidades e Estados
                                                     </a>
@@ -156,8 +158,10 @@
                         <div class="panel panel-default">
                             <div class="panel-heading">
                                 <h4 class="panel-title">
-                                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseFour"><span class="glyphicon glyphicon-file">
-                                        </span>Reports</a>
+                                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseFour">
+                                        <span class="glyphicon glyphicon-file"></span>
+                                        Reports
+                                    </a>
                                 </h4>
                             </div>
                             <div id="collapseFour" class="panel-collapse collapse">
@@ -211,10 +215,8 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-sm-10 col-md-10">
-                    <div class="panel panel-default">
-                        {% block body %}{% endblock %}
-                    </div>
+                <div class="col-md-10">                    
+                    {% block body %}{% endblock %}
                 </div>
             </div> 
         </div>

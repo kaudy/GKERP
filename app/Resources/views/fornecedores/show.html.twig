@@ -1,76 +1,121 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Fornecedore</h1>
-
-    <table>
+    <div>
+        <div class="pull-right">           
+            <span></span>    
+            <a class="btn btn-success" href="{{ path('contatosfornecedores_new_with_fornecedor', { 'id': fornecedor.id }) }}">
+                <span class="glyphicon glyphicon-user"></span>
+                Novo Contato
+            </a>
+            <a class="btn btn-info" href="{{ path('fornecedores_edit', {'id': fornecedor.id}) }}" title="Editar dados do fornecedor">
+                <span class="glyphicon glyphicon-cog"></span>
+                Editar
+            </a>
+            <a href="{{ path('fornecedores_index') }}"  class="btn btn-danger">
+                <span class="glyphicon glyphicon-remove"></span>                
+                Fechar
+            </a>
+        </div>
+        <h2><b>Fornecedor #{{ fornecedor.id }}</b></h2>
+    </div>
+    <br>
+    <table class="table">
         <tbody>
             <tr>
-                <th>Id</th>
-                <td>{{ fornecedore.id }}</td>
+                <th>Código</th>
+                <td>{{ fornecedor.id }}</td>
             </tr>
             <tr>
-                <th>Cnpj</th>
-                <td>{{ fornecedore.cnpj }}</td>
+                <th>CNPJ</th>
+                <td>{{ fornecedor.cnpj }}</td>
             </tr>
             <tr>
-                <th>Razaosocial</th>
-                <td>{{ fornecedore.razaoSocial }}</td>
+                <th>Razão Social</th>
+                <td>{{ fornecedor.razaoSocial }}</td>
             </tr>
             <tr>
-                <th>Nomefantasia</th>
-                <td>{{ fornecedore.nomeFantasia }}</td>
+                <th>Nome Fantasia</th>
+                <td>{{ fornecedor.nomeFantasia }}</td>
             </tr>
             <tr>
-                <th>Inscricaoestatual</th>
-                <td>{{ fornecedore.inscricaoEstatual }}</td>
+                <th>Inscrição Estatual</th>
+                <td>{{ fornecedor.inscricaoEstatual }}</td>
             </tr>
             <tr>
-                <th>Endereco</th>
-                <td>{{ fornecedore.endereco }}</td>
+                <th>Endereço</th>
+                <td>{{ fornecedor.endereco }}</td>
             </tr>
             <tr>
                 <th>Numero</th>
-                <td>{{ fornecedore.numero }}</td>
+                <td>{{ fornecedor.numero }}</td>
             </tr>
             <tr>
                 <th>Complemento</th>
-                <td>{{ fornecedore.complemento }}</td>
+                <td>{{ fornecedor.complemento }}</td>
             </tr>
             <tr>
                 <th>Cep</th>
-                <td>{{ fornecedore.cep }}</td>
+                <td>{{ fornecedor.cep }}</td>
             </tr>
             <tr>
                 <th>Bairro</th>
-                <td>{{ fornecedore.bairro }}</td>
+                <td>{{ fornecedor.bairro }}</td>
             </tr>
             <tr>
-                <th>Usuariocadastro</th>
-                <td>{{ fornecedore.usuarioCadastro }}</td>
+                <th>Cadastrado por</th>
+                <td>{{ fornecedor.usuarioCadastro }}</td>
             </tr>
             <tr>
-                <th>Datacadastro</th>
-                <td>{% if fornecedore.dataCadastro %}{{ fornecedore.dataCadastro|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <th>Data de Cadastro</th>
+                <td>{% if fornecedor.dataCadastro %}{{ fornecedor.dataCadastro|date('d/m/Y H:i:s') }}{% endif %}</td>
             </tr>
             <tr>
                 <th>Ativo</th>
-                <td>{{ fornecedore.ativo }}</td>
+                <td>{% if fornecedor.ativo == 'S' %}{{ 'Sim' }}{% else %}{{ 'Não' }}{% endif %}</td>                
             </tr>
         </tbody>
     </table>
-
-    <ul>
-        <li>
-            <a href="{{ path('fornecedores_index') }}">Back to the list</a>
-        </li>
-        <li>
-            <a href="{{ path('fornecedores_edit', { 'id': fornecedore.id }) }}">Edit</a>
-        </li>
-        <li>
-            {{ form_start(delete_form) }}
-                <input type="submit" value="Delete">
-            {{ form_end(delete_form) }}
-        </li>
-    </ul>
+    <div>
+        <h3><b>Contatos</b></h3>
+    </div>        
+    <table class="table">
+        <thead>
+             <th>Contato</th>
+             <th>E-Mail</th>
+             <th>Telefone</th>
+             <th>Data de Cadastro</th>
+             <th>Editar</th>
+        </thead>
+        <tbody>
+            {% for contatoFornecedor in contatosFornecedores %}
+                <tr>                   
+                    <td>{{ contatoFornecedor.contato }}</td>
+                    <td>{{ contatoFornecedor.email }}</td>
+                    <td>({{ contatoFornecedor.ddd }}){{ contatoFornecedor.telefone }}</td>
+                    <td>{% if contatoFornecedor.dataCadastro %}{{ contatoFornecedor.dataCadastro|date('d/m/Y H:i:s') }}{% endif %}</td>
+                    <td>
+                        <a class="btn btn-info" href="{{ path('contatosfornecedores_edit', {'id': contatoFornecedor.id}) }}" title="Editar dados do fornecedor">
+                        <span class="glyphicon glyphicon-cog"></span>
+                        Editar
+                    </a>
+                    </td>
+                </tr>
+            {% endfor %} 
+        </tbody>
+    </table>
+    <div>
+        <a href="{{ path('fornecedores_index') }}"  class="btn btn-danger">
+            <span class="glyphicon glyphicon-remove"></span>
+            Fechar
+        </a>
+        <div class="pull-right">
+            <a href="#top" title="Ir para o topo">
+                <span class="glyphicon glyphicon-chevron-up"></span>                
+            </a> 
+        </div>
+        <br><br><br><br>    
+    </div>            
 {% endblock %}
+
+

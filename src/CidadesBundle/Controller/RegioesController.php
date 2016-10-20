@@ -66,12 +66,12 @@ class RegioesController extends Controller
      * @Route("/{id}", name="regioes_show")
      * @Method("GET")
      */
-    public function showAction(Regioes $regioes)
+    public function showAction(Regioes $regiao)
     {
-        $deleteForm = $this->createDeleteForm($regioes);
+        $deleteForm = $this->createDeleteForm($regiao);
 
         return $this->render('regioes/show.html.twig', array(
-                    'regioes' => $regioes,
+                    'regiao' => $regiao,
                     'delete_form' => $deleteForm->createView(),
         ));
     }
@@ -92,7 +92,7 @@ class RegioesController extends Controller
         {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('regioes_edit', array('id' => $regioes->getId()));
+            return $this->redirectToRoute('regioes_index');
         }
 
         return $this->render('regioes/edit.html.twig', array(

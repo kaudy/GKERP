@@ -43,12 +43,13 @@ class CidadesController extends Controller
         $form = $this->createForm('CidadesBundle\Form\CidadesType', $cidade);
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid()) 
+        {
             $em = $this->getDoctrine()->getManager();
             $em->persist($cidade);
             $em->flush($cidade);
 
-            return $this->redirectToRoute('cidades_show', array('id' => $cidade->getId()));
+            return $this->redirectToRoute('cidades_index');
         }
 
         return $this->render('cidades/new.html.twig', array(
@@ -87,8 +88,8 @@ class CidadesController extends Controller
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $this->getDoctrine()->getManager()->flush();
-
-            return $this->redirectToRoute('cidades_edit', array('id' => $cidade->getId()));
+            
+            return $this->redirectToRoute('cidades_index');
         }
 
         return $this->render('cidades/edit.html.twig', array(

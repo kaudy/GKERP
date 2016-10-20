@@ -2,25 +2,23 @@
 
 {% block body %}
     <div>           
-        <h3>Tipo de Cidade #{{ tiposCidade.id }}</h3>
+        <h2>Tipo de Cidade #{{ tiposCidade.id }}</h2>
     </div>    
     <table class="table">
         <thead>
             <tr>
                 <th>Código</th>
                 <th>Tipo de Cidade</th>                
-                <th>Ação</th>
+                <th>Editar</th>
             </tr>
         </thead>
         <tbody>           
             <tr>
                 <td>
-                    <a href="{{ path('tiposcidades_show', { 'id': tiposCidade.id }) }}">
-                        {{ tiposCidade.id }}
-                    </a>
+                    {{ tiposCidade.id }}                    
                 </td>
                 <td>
-                    {{ tiposCidade.tipo|upper }}
+                    {{ tiposCidade.tipo|capitalize }}
                 </td>                  
                 <td>
                     <a class="btn btn-info" href="{{ path('tiposcidades_edit', {'id': tiposCidade.id}) }}" >

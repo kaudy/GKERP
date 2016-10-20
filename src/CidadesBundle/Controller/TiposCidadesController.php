@@ -48,7 +48,7 @@ class TiposCidadesController extends Controller
             $em->persist($tiposCidade);
             $em->flush($tiposCidade);
 
-            return $this->redirectToRoute('tiposcidades_show', array('id' => $tiposCidade->getId()));
+            return $this->redirectToRoute('tiposcidades_index');
         }
 
         return $this->render('tiposcidades/new.html.twig', array(
@@ -88,7 +88,7 @@ class TiposCidadesController extends Controller
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('tiposcidades_edit', array('id' => $tiposCidade->getId()));
+            return $this->redirectToRoute('tiposcidades_index');
         }
 
         return $this->render('tiposcidades/edit.html.twig', array(

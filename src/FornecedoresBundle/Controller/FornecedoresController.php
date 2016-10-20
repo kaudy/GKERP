@@ -7,6 +7,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;
+use FornecedoresBundle\Entity\ContatosFornecedores;
 
 /**
  * Fornecedore controller.
@@ -70,12 +71,19 @@ class FornecedoresController extends Controller
      * @Route("/{id}", name="fornecedores_show")
      * @Method("GET")
      */
-    public function showAction(Fornecedores $fornecedore)
+    public function showAction(Fornecedores $fornecedor)
     {
-        $deleteForm = $this->createDeleteForm($fornecedore);
+        $deleteForm = $this->createDeleteForm($fornecedor);
+        
+        //Procura todos os contatos do fornecedor
+        $em = $this->getDoctrine()->getManager();
+        $contatosFornecedores = $em->getRepository('FornecedoresBundle:ContatosFornecedores')
+                                ->findBy(array('fornecedor' => $fornecedor));
 
+        
         return $this->render('fornecedores/show.html.twig', array(
-            'fornecedore' => $fornecedore,
+            'fornecedor' => $fornecedor,
+            'contatosFornecedores' => $contatosFornecedores,
             'delete_form' => $deleteForm->createView(),
         ));
     }

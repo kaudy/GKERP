@@ -13,7 +13,7 @@ class EstadosType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('idRegiao')->add('estado')->add('uf')        ;
+        $builder->add('idRegiao')->add('estado')->add('uf');        
     }
     
     /**

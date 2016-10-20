@@ -3,14 +3,14 @@
 {% block body %}
     <div>
         <a class="btn btn-primary pull-right" href="{{ path('tiposcidades_new') }}">Novo Tipo</a>    
-        <h2>Listagem de Tipos de Cidades</h2>
+        <h2>Tipos de Cidades</h2>
     </div>
     <table class="table">
         <thead>
             <tr>
                 <th>Código</th>
                 <th>Tipo de Cidade</th>                
-                <th>Actions</th>
+                <th>Editar</th>
             </tr>
         </thead>
         <tbody>
@@ -22,10 +22,10 @@
                         </a>
                     </td>
                     <td>
-                        {{ tiposCidade.tipo|upper }}
+                        {{ tiposCidade.tipo|capitalize }}
                     </td>                  
                     <td>
-                        <a class="btn btn-info" href="{{ path('tiposcidades_edit', {'id': tiposCidade.id}) }}" >
+                        <a class="btn btn-info" href="{{ path('tiposcidades_edit', {'id': tiposCidade.id}) }}" title="Editar">
                             <span class="glyphicon glyphicon-cog"></span>
                         </a>
                     </td>

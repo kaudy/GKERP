@@ -48,7 +48,7 @@ class EstadosController extends Controller
             $em->persist($estado);
             $em->flush($estado);
 
-            return $this->redirectToRoute('estados_show', array('id' => $estado->getId()));
+            return $this->redirectToRoute('estados_index');
         }
 
         return $this->render('estados/new.html.twig', array(
@@ -88,7 +88,7 @@ class EstadosController extends Controller
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('estados_edit', array('id' => $estado->getId()));
+            return $this->redirectToRoute('estados_index');
         }
 
         return $this->render('estados/edit.html.twig', array(

@@ -1,21 +1,31 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Região</h1>
+    <h2>Região #{{ regiao.id }}</h2>
 
-    <table>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Codigo</th>
+                <th>Região</th>               
+                <th>Editar</th>
+            </tr>
+        </thead>
         <tbody>
             <tr>
-                <th>Código: </th>
-                <td>{{ regioes.id }}</td>
-            </tr>
-            <tr>
-                <th>Região: </th>
-                <td>{{ regioes.regiao }}</td>
+                <td>{{ regiao.id }}</td>
+                <td>{{ regiao.regiao|capitalize }}</td>              
+                <td>
+                    <a class="btn btn-info" href="{{ path('regioes_edit', {'id': regiao.id}) }}" title="Editar">
+                        <span class="glyphicon glyphicon-cog"></span>
+                    </a>
+                </td>
             </tr>
         </tbody>
     </table>
-    <br>                
-    <a href="{{ path('regioes_index') }}"  class="btn btn-success"> Retornar</a>
-    <a href="{{ path('regioes_edit', { 'id': regioes.id }) }}"  class="btn btn-info"> Editar</a>
+    <div>
+        <a href="{{ path('regioes_index') }}"  class="btn btn-success">
+            Retornar
+        </a>
+    </div>
 {% endblock %}

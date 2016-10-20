@@ -1,9 +1,17 @@
 {% extends 'base.html.twig' %}
 
-{% block body %}
+{% block body %}    
     <div>
-        <a class="btn btn-primary pull-right" href="{{ path('fornecedores_new') }}">Novo Fornecedor</a>
-        <a class="btn btn-success pull-right" href="{{ path('contatosfornecedores_new') }}">Novo Contato Fornecedor</a>        
+        <div class="pull-right">           
+            <a class="btn btn-primary" href="{{ path('fornecedores_new') }}" title="Cadastrar novo fornecedor">
+                <span class="glyphicon glyphicon-plus"></span>
+                Novo Fornecedor
+            </a>
+            <a class="btn btn-success" href="{{ path('contatosfornecedores_new') }}" title="Cadastrar novo contato para um fornecedor">
+                <span class="glyphicon glyphicon-user"></span>
+                Novo Contato Fornecedor
+            </a>
+        </div>        
         <h2>Fornecedores</h2>
     </div>
 
@@ -19,28 +27,28 @@
                 <th>Estado</th>
                 <th>Data de Cadastro</th>
                 <th>Ativo</th>
-                <th>Actions</th>
+                <th>Editar</th>
             </tr>
         </thead>
         <tbody>
-        {% for fornecedor in fornecedores %}
-            <tr>
-                <td><a href="{{ path('fornecedores_show', { 'id': fornecedor.id }) }}">{{ fornecedor.id }}</a></td>
-                <td>{{ fornecedor.cnpj }}</td>
-                <td>{{ fornecedor.razaoSocial }}</td>
-                <td>{{ fornecedor.nomeFantasia }}</td>
-                <td>{{ fornecedor.inscricaoEstatual }}</td>
-                <td>{{ fornecedor.cidade }}</td>
-                <td>{{ fornecedor.estado }}</td>                            
-                <td>{% if fornecedor.dataCadastro %}{{ fornecedor.dataCadastro|date('d/m/Y H:i:s') }}{% endif %}</td>
-                <td>{{ fornecedor.ativo }}</td>
-                <td>
-                    <a class="btn btn-info" href="{{ path('fornecedores_edit', {'id': fornecedor.id}) }}" >
-                        <span class="glyphicon glyphicon-cog"></span>
-                    </a>                    
-                </td>
-            </tr>
-        {% endfor %}
+            {% for fornecedor in fornecedores %}
+                <tr>
+                    <td><a href="{{ path('fornecedores_show', { 'id': fornecedor.id }) }}">{{ fornecedor.id }}</a></td>
+                    <td>{{ fornecedor.cnpj }}</td>
+                    <td>{{ fornecedor.razaoSocial }}</td>
+                    <td>{{ fornecedor.nomeFantasia }}</td>
+                    <td>{{ fornecedor.inscricaoEstatual }}</td>
+                    <td>{{ fornecedor.cidade }}</td>
+                    <td>{{ fornecedor.estado }}</td>                            
+                    <td>{% if fornecedor.dataCadastro %}{{ fornecedor.dataCadastro|date('d/m/Y H:i:s') }}{% endif %}</td>
+                    <td>{% if fornecedor.ativo == 'S' %}{{ 'Sim' }}{% else %}{{ 'Não' }}{% endif %}</td>
+                    <td>
+                        <a class="btn btn-info" href="{{ path('fornecedores_edit', {'id': fornecedor.id}) }}" title="Editar">
+                            <span class="glyphicon glyphicon-cog"></span>
+                        </a>                    
+                    </td>
+                </tr>
+            {% endfor %}
         </tbody>
     </table>   
 {% endblock %}

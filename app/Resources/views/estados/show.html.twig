@@ -1,40 +1,35 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Estado</h1>
+    <h2>Estado #{{ estado.id }}</h2>   
 
-    <table>
-        <tbody>
+    <table class="table">
+        <thead>
             <tr>
-                <th>Id</th>
-                <td>{{ estado.id }}</td>
-            </tr>
-            <tr>
-                <th>Idregiao</th>
-                <td>{{ estado.idRegiao }}</td>
-            </tr>
-            <tr>
+                <th>Código</th>
                 <th>Estado</th>
-                <td>{{ estado.estado }}</td>
+                <th>UF</th>
+                <th>Região</th>  
+                <th>Actions</th>
             </tr>
+        </thead>
+        <tbody>           
             <tr>
-                <th>Uf</th>
+                <td>{{ estado.id }}</td>
+                <td>{{ estado.estado }}</td>
                 <td>{{ estado.uf }}</td>
-            </tr>
+                <td>{{ estado.idRegiao|upper }}</td>                    
+                <td>
+                    <a class="btn btn-info" href="{{ path('estados_edit', {'id': estado.id}) }}">
+                        <span class="glyphicon glyphicon-cog"></span>
+                    </a>
+                </td>
+            </tr>           
         </tbody>
     </table>
-
-    <ul>
-        <li>
-            <a href="{{ path('estados_index') }}">Back to the list</a>
-        </li>
-        <li>
-            <a href="{{ path('estados_edit', { 'id': estado.id }) }}">Edit</a>
-        </li>
-        <li>
-            {{ form_start(delete_form) }}
-                <input type="submit" value="Delete">
-            {{ form_end(delete_form) }}
-        </li>
-    </ul>
+    <div>
+        <a href="{{ path('estados_index') }}"  class="btn btn-success">
+            Retornar
+        </a>
+    </div>
 {% endblock %}

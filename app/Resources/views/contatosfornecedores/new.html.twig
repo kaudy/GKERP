@@ -3,11 +3,21 @@
 {% form_theme form 'bootstrap_3_horizontal_layout.html.twig' %}
 
 {% block body %}
-    <h1>Contatosfornecedore creation</h1>
-
-    {{ form_start(form) }}
-        {{ form_widget(form) }}
-            <input type="submit" value="Salvar" class="btn btn-success" />
-            <a href="{{ path('fornecedores_index') }}"  class="btn btn-danger"> Cancelar</a>
-    {{ form_end(form) }}    
+    <h2>Cadastrar Novo Contato</h2>
+    <div class="col-md-8">
+        {{ form_start(form) }}
+            {{ form_widget(form) }}
+                <input type="submit" value="Salvar" class="btn btn-success" />
+                {% if origem =='newAction' %}
+                    <a href="{{ path('fornecedores_index') }}"  class="btn btn-danger">
+                        Cancelar
+                    </a>
+                {% else %} 
+                     <a href="{{ path('fornecedores_show', {'id': contatoFornecedor.fornecedor.id}) }}" class="btn btn-danger">
+                         Cancelar
+                     </a>
+                {% endif %}
+                
+        {{ form_end(form) }}  
+    </div>
 {% endblock %}

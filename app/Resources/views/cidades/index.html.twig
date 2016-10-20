@@ -14,20 +14,25 @@
                 <th>UF</th>
                 <th>Região</th>
                 <th>Tipo</th>
-                <th>Actions</th>
+                <th>Editar</th>
             </tr>
         </thead>
         <tbody>
             {% for cidade in cidades %}
                 <tr>
-                    <td><a href="{{ path('cidades_show', { 'id': cidade.id }) }}">{{ cidade.id }}</a></td>
-                    <td>{{ cidade.cidade|upper }}</td>
+                    <td>
+                        <a href="{{ path('cidades_show', { 'id': cidade.id }) }}">
+                            {{ cidade.id }}</a>
+                    </td>
+                    <td>{{ cidade.cidade }}</td>
                     <td>{{ cidade.idEstado }}</td>  
                     <td>{{ cidade.idEstado.uf }}</td>
                     <td>{{ cidade.idEstado.idRegiao }}</td>
                     <td>{{ cidade.idTipoCidade }}</td>  
                     <td>
-                        <a class="btn btn-info" href="{{ path('cidades_edit', {'id': cidade.id}) }}" ><span class="glyphicon glyphicon-cog"></span></a>
+                        <a class="btn btn-info" href="{{ path('cidades_edit', {'id': cidade.id}) }}" title="Editar">
+                            <span class="glyphicon glyphicon-cog"></span>
+                        </a>
                     </td>
                 </tr>
             {% endfor %}
