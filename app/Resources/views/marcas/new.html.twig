@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{% form_theme form 'bootstrap_3_horizontal_layout.html.twig' %}
+
+{% block body %}
+    <h2>Cadastrar Novo Fabricante</h2>
+    <div class="col-md-8">
+    <br>
+    {{ form_start(form) }}
+        {{ form_widget(form) }}
+        <input type="submit" value="Salvar" class="btn btn-success" />
+        {% if origem =='newAction' %}
+            <a href="{{ path('fabricantes_index') }}"  class="btn btn-danger">
+                Cancelar
+            </a>
+        {% else %} 
+             <a href="{{ path('fabricantes_show', {'id': marca.fabricante.id}) }}" class="btn btn-danger">
+                 Cancelar
+             </a>
+        {% endif %}
+    {{ form_end(form) }}
+    </div>
+    
+{% endblock %}

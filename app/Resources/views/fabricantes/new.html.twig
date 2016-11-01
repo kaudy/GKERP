@@ -1,16 +1,15 @@
 {% extends 'base.html.twig' %}
 
-{% block body %}
-    <h1>Fabricante creation</h1>
+{% form_theme form 'bootstrap_3_horizontal_layout.html.twig' %}
 
+{% block body %}
+    <h2>Cadastrar Novo Fabricante</h2>
+    <div class="col-md-8">
+    <br>
     {{ form_start(form) }}
         {{ form_widget(form) }}
-        <input type="submit" value="Create" />
+            <input type="submit" value="Salvar" class="btn btn-success" />
+            <a href="{{ path('fabricantes_index') }}"  class="btn btn-danger"> Cancelar</a>
     {{ form_end(form) }}
-
-    <ul>
-        <li>
-            <a href="{{ path('fabricantes_index') }}">Back to the list</a>
-        </li>
-    </ul>
+    </div>
 {% endblock %}

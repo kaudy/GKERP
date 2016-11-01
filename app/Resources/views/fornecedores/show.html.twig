@@ -68,7 +68,7 @@
             </tr>
             <tr>
                 <th>Data de Cadastro</th>
-                <td>{% if fornecedor.dataCadastro %}{{ fornecedor.dataCadastro|date('d/m/Y H:i:s') }}{% endif %}</td>
+                <td>{% if fornecedor.dataCadastro %}{{ fornecedor.dataCadastro|date('d/m/Y') }}{% endif %}</td>
             </tr>
             <tr>
                 <th>Ativo</th>
@@ -93,11 +93,10 @@
                     <td>{{ contatoFornecedor.contato }}</td>
                     <td>{{ contatoFornecedor.email }}</td>
                     <td>({{ contatoFornecedor.ddd }}){{ contatoFornecedor.telefone }}</td>
-                    <td>{% if contatoFornecedor.dataCadastro %}{{ contatoFornecedor.dataCadastro|date('d/m/Y H:i:s') }}{% endif %}</td>
+                    <td>{% if contatoFornecedor.dataCadastro %}{{ contatoFornecedor.dataCadastro|date('d/m/Y') }}{% endif %}</td>
                     <td>
                         <a class="btn btn-info" href="{{ path('contatosfornecedores_edit', {'id': contatoFornecedor.id}) }}" title="Editar dados do fornecedor">
-                        <span class="glyphicon glyphicon-cog"></span>
-                        Editar
+                        <span class="glyphicon glyphicon-cog"></span>                        
                     </a>
                     </td>
                 </tr>

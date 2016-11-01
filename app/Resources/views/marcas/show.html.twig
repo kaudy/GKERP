@@ -1,0 +1,44 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Marca</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ marca.id }}</td>
+            </tr>
+            <tr>
+                <th>Marca</th>
+                <td>{{ marca.marca }}</td>
+            </tr>
+            <tr>
+                <th>Idusuariocadastro</th>
+                <td>{{ marca.idUsuarioCadastro }}</td>
+            </tr>
+            <tr>
+                <th>Datacadastro</th>
+                <td>{% if marca.dataCadastro %}{{ marca.dataCadastro|date('Y-m-d H:i:s') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Ativo</th>
+                <td>{{ marca.ativo }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('marcas_index') }}">Back to the list</a>
+        </li>
+        <li>
+            <a href="{{ path('marcas_edit', { 'id': marca.id }) }}">Edit</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}

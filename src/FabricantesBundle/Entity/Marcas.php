@@ -5,12 +5,12 @@ namespace FabricantesBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Fabricantes
+ * Marcas
  *
- * @ORM\Table(name="fabricantes")
- * @ORM\Entity(repositoryClass="FabricantesBundle\Repository\FabricantesRepository")
+ * @ORM\Table(name="marcas")
+ * @ORM\Entity(repositoryClass="FabricantesBundle\Repository\MarcasRepository")
  */
-class Fabricantes
+class Marcas
 {
     /**
      * @var int
@@ -22,17 +22,23 @@ class Fabricantes
     private $id;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="fabricante", type="string", length=200, unique=true)
+     * @ORM\ManyToOne(targetEntity="Fabricantes")
+     * @ORM\JoinColumn(name="id_fabricante", referencedColumnName="id")
      */
     private $fabricante;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="marca", type="string", length=100, unique=true)
+     */
+    private $marca;
 
     /**
      * @var int
      *
      * @ORM\Column(name="id_usuario_cadastro", type="integer")
-     */
+     */        
     private $usuarioCadastro;
 
     /**
@@ -41,6 +47,13 @@ class Fabricantes
      * @ORM\Column(name="data_cadastro", type="datetime")
      */
     private $dataCadastro;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="ativo", type="string", length=1)
+     */
+    private $ativo;
 
 
     /**
@@ -56,11 +69,11 @@ class Fabricantes
     /**
      * Set fabricante
      *
-     * @param string $fabricante
+     * @param \FabricantesBundle\Entity\Fabricantes $fabricante
      *
-     * @return Fabricantes
+     * @return Marcas
      */
-    public function setFabricante($fabricante)
+    public function setFabricante(\FabricantesBundle\Entity\Fabricantes $fabricante = null)
     {
         $this->fabricante = $fabricante;
 
@@ -70,7 +83,7 @@ class Fabricantes
     /**
      * Get fabricante
      *
-     * @return string
+     * @return \FabricantesBundle\Entity\Fabricantes
      */
     public function getFabricante()
     {
@@ -78,11 +91,35 @@ class Fabricantes
     }
 
     /**
+     * Set marca
+     *
+     * @param string $marca
+     *
+     * @return Marcas
+     */
+    public function setMarca($marca)
+    {
+        $this->marca = $marca;
+
+        return $this;
+    }
+
+    /**
+     * Get marca
+     *
+     * @return string
+     */
+    public function getMarca()
+    {
+        return $this->marca;
+    }
+
+    /**
      * Set usuarioCadastro
      *
      * @param integer $usuarioCadastro
      *
-     * @return Fabricantes
+     * @return Marcas
      */
     public function setUsuarioCadastro($usuarioCadastro)
     {
@@ -106,7 +143,7 @@ class Fabricantes
      *
      * @param \DateTime $dataCadastro
      *
-     * @return Fabricantes
+     * @return Marcas
      */
     public function setDataCadastro($dataCadastro)
     {
@@ -124,10 +161,33 @@ class Fabricantes
     {
         return $this->dataCadastro;
     }
-    
-    public function __toString()
+
+    /**
+     * Set ativo
+     *
+     * @param string $ativo
+     *
+     * @return Marcas
+     */
+    public function setAtivo($ativo)
     {
-        return $this->getFabricante();
+        $this->ativo = $ativo;
+
+        return $this;
     }
+
+    /**
+     * Get ativo
+     *
+     * @return string
+     */
+    public function getAtivo()
+    {
+        return $this->ativo;
+    }
+    
+    
+    
+    
 }
 

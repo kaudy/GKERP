@@ -33,14 +33,18 @@
         <tbody>
             {% for fornecedor in fornecedores %}
                 <tr>
-                    <td><a href="{{ path('fornecedores_show', { 'id': fornecedor.id }) }}">{{ fornecedor.id }}</a></td>
+                    <td>
+                        <a href="{{ path('fornecedores_show', { 'id': fornecedor.id }) }}">
+                            {{ fornecedor.id }}
+                        </a>
+                    </td>
                     <td>{{ fornecedor.cnpj }}</td>
                     <td>{{ fornecedor.razaoSocial }}</td>
                     <td>{{ fornecedor.nomeFantasia }}</td>
                     <td>{{ fornecedor.inscricaoEstatual }}</td>
                     <td>{{ fornecedor.cidade }}</td>
                     <td>{{ fornecedor.estado }}</td>                            
-                    <td>{% if fornecedor.dataCadastro %}{{ fornecedor.dataCadastro|date('d/m/Y H:i:s') }}{% endif %}</td>
+                    <td>{% if fornecedor.dataCadastro %}{{ fornecedor.dataCadastro|date('d/m/Y') }}{% endif %}</td>
                     <td>{% if fornecedor.ativo == 'S' %}{{ 'Sim' }}{% else %}{{ 'Não' }}{% endif %}</td>
                     <td>
                         <a class="btn btn-info" href="{{ path('fornecedores_edit', {'id': fornecedor.id}) }}" title="Editar">

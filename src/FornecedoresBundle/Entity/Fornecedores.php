@@ -101,7 +101,7 @@ class Fornecedores
     /**
      * @var int
      *
-     * @ORM\Column(name="usuario_cadastro", type="integer", nullable=true)
+     * @ORM\Column(name="id_usuario_cadastro", type="integer", nullable=true)
      */
     private $usuarioCadastro;
 

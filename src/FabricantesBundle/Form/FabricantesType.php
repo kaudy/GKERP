@@ -13,7 +13,7 @@ class FabricantesType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('fabricante')->add('usuarioCadastro')->add('dataCadastro')        ;
+        $builder->add('fabricante');
     }
     
     /**

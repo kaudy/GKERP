@@ -5,7 +5,8 @@ namespace FabricantesBundle\Controller;
 use FabricantesBundle\Entity\Fabricantes;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;use Symfony\Component\HttpFoundation\Request;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\HttpFoundation\Request;
 
 /**
  * Fabricante controller.
@@ -14,6 +15,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;use Symfony\Component
  */
 class FabricantesController extends Controller
 {
+
     /**
      * Lists all fabricante entities.
      *
@@ -27,7 +29,7 @@ class FabricantesController extends Controller
         $fabricantes = $em->getRepository('FabricantesBundle:Fabricantes')->findAll();
 
         return $this->render('fabricantes/index.html.twig', array(
-            'fabricantes' => $fabricantes,
+                    'fabricantes' => $fabricantes,
         ));
     }
 
@@ -43,7 +45,15 @@ class FabricantesController extends Controller
         $form = $this->createForm('FabricantesBundle\Form\FabricantesType', $fabricante);
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid())
+        {
+            //usuario fixo - modificar quando implantar controle de usuarios
+            $fabricante->setUsuarioCadastro(1);
+            
+            //Pega a data e horario atual do cadastro
+            $dataAtual = new \DateTime("now");
+            $fabricante->setDataCadastro($dataAtual);
+            
             $em = $this->getDoctrine()->getManager();
             $em->persist($fabricante);
             $em->flush($fabricante);
@@ -52,8 +62,8 @@ class FabricantesController extends Controller
         }
 
         return $this->render('fabricantes/new.html.twig', array(
-            'fabricante' => $fabricante,
-            'form' => $form->createView(),
+                    'fabricante' => $fabricante,
+                    'form' => $form->createView(),
         ));
     }
 
@@ -67,9 +77,15 @@ class FabricantesController extends Controller
     {
         $deleteForm = $this->createDeleteForm($fabricante);
 
+        //Procura todas as marcas do fornecedor
+        $em = $this->getDoctrine()->getManager();
+        $marcas = $em->getRepository('FabricantesBundle:Marcas')
+                ->findBy(array('fabricante' => $fabricante));
+
         return $this->render('fabricantes/show.html.twig', array(
-            'fabricante' => $fabricante,
-            'delete_form' => $deleteForm->createView(),
+                    'fabricante' => $fabricante,
+                    'marcas' => $marcas,
+                    'delete_form' => $deleteForm->createView(),
         ));
     }
 
@@ -85,16 +101,17 @@ class FabricantesController extends Controller
         $editForm = $this->createForm('FabricantesBundle\Form\FabricantesType', $fabricante);
         $editForm->handleRequest($request);
 
-        if ($editForm->isSubmitted() && $editForm->isValid()) {
+        if ($editForm->isSubmitted() && $editForm->isValid())
+        {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('fabricantes_edit', array('id' => $fabricante->getId()));
+            return $this->redirectToRoute('fabricantes_show', array('id' => $fabricante->getId()));
         }
 
         return $this->render('fabricantes/edit.html.twig', array(
-            'fabricante' => $fabricante,
-            'edit_form' => $editForm->createView(),
-            'delete_form' => $deleteForm->createView(),
+                    'fabricante' => $fabricante,
+                    'edit_form' => $editForm->createView(),
+                    'delete_form' => $deleteForm->createView(),
         ));
     }
 
@@ -109,7 +126,8 @@ class FabricantesController extends Controller
         $form = $this->createDeleteForm($fabricante);
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid())
+        {
             $em = $this->getDoctrine()->getManager();
             $em->remove($fabricante);
             $em->flush($fabricante);
@@ -128,9 +146,10 @@ class FabricantesController extends Controller
     private function createDeleteForm(Fabricantes $fabricante)
     {
         return $this->createFormBuilder()
-            ->setAction($this->generateUrl('fabricantes_delete', array('id' => $fabricante->getId())))
-            ->setMethod('DELETE')
-            ->getForm()
+                        ->setAction($this->generateUrl('fabricantes_delete', array('id' => $fabricante->getId())))
+                        ->setMethod('DELETE')
+                        ->getForm()
         ;
     }
+
 }

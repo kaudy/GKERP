@@ -1,12 +1,28 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Fabricante</h1>
-
-    <table>
+    <div>
+        <div class="pull-right">           
+            <span></span>    
+            <a class="btn btn-success" href="{{ path('marcas_new_with_fabricante', { 'id': fabricante.id }) }}">
+                <span class="glyphicon glyphicon-user"></span>
+                Nova Marca
+            </a>
+            <a class="btn btn-info" href="{{ path('fabricantes_edit', {'id': fabricante.id}) }}" title="Editar os dados do fabricante">
+                <span class="glyphicon glyphicon-cog"></span>
+                Editar
+            </a>
+            <a href="{{ path('fabricantes_index') }}"  class="btn btn-danger">
+                <span class="glyphicon glyphicon-remove"></span>                
+                Fechar
+            </a>
+        </div>
+        <h2><b>Fabricante #{{ fabricante.id }}</b></h2>
+    </div>    
+    <table class="table">
         <tbody>
             <tr>
-                <th>Id</th>
+                <th>Código</th>
                 <td>{{ fabricante.id }}</td>
             </tr>
             <tr>
@@ -19,22 +35,47 @@
             </tr>
             <tr>
                 <th>Datacadastro</th>
-                <td>{% if fabricante.dataCadastro %}{{ fabricante.dataCadastro|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{% if fabricante.dataCadastro %}{{ fabricante.dataCadastro|date('d/m/Y') }}{% endif %}</td>
             </tr>
         </tbody>
     </table>
-
-    <ul>
-        <li>
-            <a href="{{ path('fabricantes_index') }}">Back to the list</a>
-        </li>
-        <li>
-            <a href="{{ path('fabricantes_edit', { 'id': fabricante.id }) }}">Edit</a>
-        </li>
-        <li>
-            {{ form_start(delete_form) }}
-                <input type="submit" value="Delete">
-            {{ form_end(delete_form) }}
-        </li>
-    </ul>
+    <div>
+        <h3><b>Marcas</b></h3>
+    </div>
+    <table class="table">
+        <thead>
+             <th>Código</th>
+             <th>Marca</th>             
+             <th>Data de Cadastro</th>
+             <th>Ativo</th>
+             <th>Editar</th>
+        </thead>
+        <tbody>
+            {% for marca in marcas %}
+                <tr>                   
+                    <td>{{ marca.id }}</td>
+                    <td>{{ marca.marca }}</td>                    
+                    <td>{% if marca.dataCadastro %}{{ marca.dataCadastro|date('d/m/Y') }}{% endif %}</td>
+                    <td>{{ marca.ativo }}</td>  
+                    <td>
+                        <a class="btn btn-info" href="{{ path('marcas_edit', {'id': marca.id}) }}" title="Editar os dados da marca">
+                        <span class="glyphicon glyphicon-cog"></span>                        
+                    </a>
+                    </td>
+                </tr>
+            {% endfor %} 
+        </tbody>
+    </table>
+    <div>
+        <a href="{{ path('fabricantes_index') }}"  class="btn btn-danger">
+            <span class="glyphicon glyphicon-remove"></span>
+            Fechar
+        </a>
+        <div class="pull-right">
+            <a href="#top" title="Ir para o topo">
+                <span class="glyphicon glyphicon-chevron-up"></span>                
+            </a> 
+        </div>
+        <br><br><br><br>    
+    </div>       
 {% endblock %}
