@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+     <div>
+        <div class="pull-right">           
+            <a class="btn btn-primary" href="{{ path('fabricantes_new') }}" title="Cadastrar novo fabricante">
+                <span class="glyphicon glyphicon-plus"></span>
+                Novo Fabricante
+            </a>
+            <a class="btn btn-success" href="{{ path('marcas_new') }}" title="Cadastrar nova marca para um fabricante">
+                <span class="glyphicon glyphicon-user"></span>
+                Nova Marca
+            </a>
+        </div>        
+        <h2>Fabricantes</h2>
+    </div>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Código</th>
+                <th>Fabricante</th>
+                <th>Cadastrado por</th> 
+                <th>Data de Cadastro</th>
+                <th>Editar</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for fabricante in fabricantes %}
+            <tr>
+                <td>
+                    <a href="{{ path('fabricantes_show', { 'id': fabricante.id }) }}">
+                        {{ fabricante.id }}
+                    </a>
+                </td>
+                <td>{{ fabricante.fabricante }}</td>
+                <td>{{ fabricante.usuarioCadastro }}</td>
+                <td>{% if fabricante.dataCadastro %}{{ fabricante.dataCadastro|date('d/m/Y') }}{% endif %}</td>
+                <td>
+                    <a class="btn btn-info" href="{{ path('fabricantes_edit', {'id': fabricante.id}) }}" title="Editar">
+                        <span class="glyphicon glyphicon-cog"></span>
+                    </a>                    
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>   
+{% endblock %}

@@ -1,0 +1,58 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div>
+        <div class="pull-right">
+            <a class="btn btn-primary" href="{{ path('cidades_new') }}" title="Cadastrar nova cidade">
+                <span class="glyphicon glyphicon-plus"></span>
+                Nova Cidade
+            </a>   
+        </div>
+        <h2>Cidades</h2>        
+    </div>
+    <br>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Código</th>
+                <th>Cidade</th>
+                <th>Estado</th>  
+                <th>UF</th>
+                <th>Região</th>
+                <th>Tipo</th>
+                <th>Editar</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for cidade in cidades %}
+                <tr>
+                    <td>
+                        <a href="{{ path('cidades_show', { 'id': cidade.id }) }}">
+                            {{ cidade.id }}</a>
+                    </td>
+                    <td>{{ cidade.cidade }}</td>
+                    <td>{{ cidade.idEstado }}</td>  
+                    <td>{{ cidade.idEstado.uf }}</td>
+                    <td>{{ cidade.idEstado.idRegiao }}</td>
+                    <td>{{ cidade.idTipoCidade }}</td>  
+                    <td>
+                        <a class="btn btn-info" href="{{ path('cidades_edit', {'id': cidade.id}) }}" title="Editar">
+                            <span class="glyphicon glyphicon-cog"></span>
+                        </a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <div>
+        <div class="pull-right">
+            <a href="#top" title="Ir para o topo">
+                <span class="glyphicon glyphicon-chevron-up"></span>                
+            </a> 
+        </div>
+        <br>
+        <br>
+        <br>
+        <br>    
+    </div>
+{% endblock %}

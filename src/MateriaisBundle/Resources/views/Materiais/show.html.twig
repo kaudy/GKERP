@@ -1,0 +1,83 @@
+{% extends 'base.html.twig' %}
+
+{% block javascripts %}
+    <script type="text/javascript" src="{{ asset('js/materiais.js') }}" ></script>
+{% endblock %}
+
+{% block body %}
+    <div>
+        <div class="pull-right">
+            <a class="btn btn-info" href="{{ path('materiais_edit', {'id': material.id}) }}" title="Editar os dados do material base">
+                <span class="glyphicon glyphicon-cog"></span>
+                Editar
+            </a>
+            <a href="{{ path('materiais_index') }}"  class="btn btn-danger">
+                <span class="glyphicon glyphicon-remove"></span>                
+                Fechar
+            </a>            
+        </div>
+        <h2><b>Material Base #{{ material.id }}</b></h2>
+    </div>  
+    <br>
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Código</th>
+                <td>
+                    {{ material.id }}
+                </td>
+            </tr>
+            <tr>
+                <th>Material</th>
+                <td>
+                    {{ material.material }}
+                </td>
+            </tr>
+            <tr>
+                <th>Data de Cadastro</th>
+                <td>
+                    {% if material.dataCadastro %}
+                        {{ material.dataCadastro|date('d/m/Y') }}
+                    {% endif %}
+                </td>
+            </tr>
+            <tr>
+                <th>Ativo</th>
+                <td>
+                    {% if material.ativo == 'S' %}
+                        <form class="form-material-ativo" action="{{ path('materiais_edit_ativo') }}">
+                            <input type="hidden" id="id_material" value="{{ material.id }}"/>
+                            <input type="hidden" id="material_ativo" value="{{ material.ativo }}"/>                                
+                            <button type="submit" class="btn btn-success" id="btn_submit_ativo" title="Desativar Material Base">
+                                <span id="span_submit_ativo" class="glyphicon glyphicon-ok"></span>
+                            </button>                                
+                        </form>
+                    {% else %}
+                        <form class="form-material-ativo" action="{{ path('materiais_edit_ativo') }}">
+                            <input type="hidden" id="id_material" value="{{ material.id }}"/>
+                            <input type="hidden" id="material_ativo" value="{{ material.ativo }}"/>                                
+                            <button type="submit" class="btn btn-danger" id="btn_submit_ativo" title="Ativar Material Base">
+                                <span id="span_submit_ativo" class="glyphicon glyphicon-remove"></span>
+                            </button>                                
+                        </form>
+                    {% endif %}
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <div>
+        <a href="{{ path('materiais_index') }}"  class="btn btn-danger">
+            <span class="glyphicon glyphicon-remove"></span>
+            Fechar
+        </a>
+        <div class="pull-right">
+            <a href="#top" title="Ir para o topo">
+                <span class="glyphicon glyphicon-chevron-up"></span>                
+            </a> 
+        </div>
+        <br>
+        <br>
+        <br>
+        <br>    
+    </div>    
+{% endblock %}

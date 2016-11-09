@@ -27,6 +27,7 @@
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
     </head>
     <body>
+        
         <nav class="navbar navbar-inverse navbar-static-top">
             <div class="container-fluid">
                 <div class="navbar-header">
@@ -39,22 +40,36 @@
                     <a class="navbar-brand" href="#">GK ERP</a>
                 </div>
                 <div id="navbar" class="navbar-collapse collapse">
-                    <ul class="nav navbar-nav navbar-right">           
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Vazio<span class="caret"></span></a>
-                            <ul class="dropdown-menu">
-                                <li>Cadastrar Novo</li>
-                                <li>Cadastrar Novo</li>
-                            </ul>           
-                        </li>
-                        <li><a href="#">Frente de Caixa</a></li>
-                        <li><a href="#">Frente de Caixa</a></li>
+                    <ul class="nav navbar-nav navbar-right">
+                        {% if(is_granted('ROLE_USER')) %}
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                    Vazio<span class="caret"></span>
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li>Cadastrar Novo</li>
+                                    <li>Cadastrar Novo</li>
+                                </ul>           
+                            </li>
+                            <li>
+                                <a href="#">Frente de Caixa</a>
+                            </li>                       
+                            <li>
+                                <a href="{{ path('fos_user_security_logout') }}">{{ app.user }}</a>
+                            </li>
+                        {% else %}
+                            <li>
+                                <a href="{{ path('fos_user_security_login') }}">Entrar</a>
+                            </li>                              
+                        {% endif %}
                     </ul>
                 </div>
             </div>
         </nav>
+       
         <div class="container-fluid">
             <div class="row">
+                {% if(is_granted('ROLE_USER')) %}
                 <div class="col-md-2">
                     <!--+++++++++++++++++++++++++++++++++++++++++++++++++++++-->
                     <!-- Painel Administrativo -------------------------------->
@@ -87,16 +102,20 @@
                                             <div id="collapseCidades" class="panel-collapse collapse">
                                                 <ul class="list-group">
                                                     <li class="list-group-item">
-                                                        <span class="glyphicon glyphicon-pencil text-primary"></span><a href="{{ path('cidades_index') }}">Cidades</a>
+                                                        <span class="glyphicon glyphicon-pencil text-primary"></span>
+                                                        <a href="{{ path('cidades_index') }}">Cidades</a>
                                                     </li>
                                                     <li class="list-group-item">
-                                                        <span class="glyphicon glyphicon-pencil text-primary"></span><a href="{{ path('estados_index') }}">Estados</a>
+                                                        <span class="glyphicon glyphicon-pencil text-primary"></span>
+                                                        <a href="{{ path('estados_index') }}">Estados</a>
                                                     </li>
                                                     <li class="list-group-item">
-                                                        <span class="glyphicon glyphicon-pencil text-primary"></span><a href="{{ path('regioes_index') }}">Regiões</a>
+                                                        <span class="glyphicon glyphicon-pencil text-primary"></span>
+                                                        <a href="{{ path('regioes_index') }}">Regiões</a>
                                                     </li>
                                                     <li class="list-group-item">
-                                                        <span class="glyphicon glyphicon-pencil text-primary"></span><a href="{{ path('tiposcidades_index') }}">Tipos de Cidades</a>
+                                                        <span class="glyphicon glyphicon-pencil text-primary"></span>
+                                                        <a href="{{ path('tiposcidades_index') }}">Tipos de Cidades</a>
                                                     </li>
                                                 </ul>
                                             </div>
@@ -143,15 +162,39 @@
                                                         Materiais
                                                     </a>
                                                 </h4>
-                                            </div>
+                                            </div>   
                                             <div id="collapseMateriais" class="panel-collapse collapse">
                                                 <ul class="list-group">
                                                     <li class="list-group-item">
                                                         <span class="glyphicon glyphicon-pencil text-primary"></span>
-                                                        <a href="#">
-                                                            Materiais Base
+                                                        <a href=" {{ path('detalhesmateriais_index') }} ">
+                                                            Materiais
+                                                        </a>
+                                                    </li>
+                                                    <li class="list-group-item">
+                                                        <span class="glyphicon glyphicon-pencil text-primary"></span>
+                                                        <a href=" {{ path('categoriasmateriais_index') }} ">
+                                                            Categorias de Materiais
                                                         </a>
                                                     </li>                                                    
+                                                    <li class="list-group-item">
+                                                        <span class="glyphicon glyphicon-pencil text-primary"></span>
+                                                        <a href=" {{ path('materiais_index') }} ">
+                                                            Materiais Base
+                                                        </a>
+                                                    </li>
+                                                    <li class="list-group-item">
+                                                        <span class="glyphicon glyphicon-pencil text-primary"></span>
+                                                        <a href=" {{ path('tiposmateriais_index') }} ">
+                                                            Tipos de Materiais
+                                                        </a>
+                                                    </li>                                                    
+                                                    <li class="list-group-item">
+                                                        <span class="glyphicon glyphicon-pencil text-primary"></span>
+                                                        <a href=" {{ path('tiposunidades_index') }} ">
+                                                            Tipos de Unidades
+                                                        </a>
+                                                    </li>
                                                 </ul>
                                             </div>
                                         </div>
@@ -220,11 +263,13 @@
                         </div>
                     </div>
                 </div>
+                {% endif %}                                        
                 <div class="col-md-10">                    
                     {% block body %}{% endblock %}
                 </div>
             </div> 
         </div>
+        
 {% block javascripts %}{% endblock %}
     </body>
 </html>

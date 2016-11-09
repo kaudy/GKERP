@@ -28,10 +28,10 @@ class Fabricantes
      */
     private $fabricante;
 
+    
     /**
-     * @var int
-     *
-     * @ORM\Column(name="id_usuario_cadastro", type="integer")
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Usuarios")
+     * @ORM\JoinColumn(name="id_usuario_cadastro", referencedColumnName="id")
      */
     private $usuarioCadastro;
 
@@ -80,11 +80,11 @@ class Fabricantes
     /**
      * Set usuarioCadastro
      *
-     * @param integer $usuarioCadastro
+     * @param \AppBundle\Entity\Usuarios $usuarioCadastro
      *
      * @return Fabricantes
      */
-    public function setUsuarioCadastro($usuarioCadastro)
+    public function setUsuarioCadastro(\AppBundle\Entity\Usuarios $usuarioCadastro = null)
     {
         $this->usuarioCadastro = $usuarioCadastro;
 
@@ -94,7 +94,7 @@ class Fabricantes
     /**
      * Get usuarioCadastro
      *
-     * @return int
+     * @return \AppBundle\Entity\Usuarios
      */
     public function getUsuarioCadastro()
     {

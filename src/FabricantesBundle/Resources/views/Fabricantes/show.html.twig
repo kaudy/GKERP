@@ -1,0 +1,104 @@
+{% extends 'base.html.twig' %}
+
+{% block javascripts %}
+    <script type="text/javascript" src="{{ asset('js/marcas.js') }}" ></script>
+{% endblock %}
+
+{% block body %}
+    <div>
+        <div class="pull-right">           
+            <span></span>    
+            <a class="btn btn-success" href="{{ path('marcas_new_with_fabricante', { 'id': fabricante.id }) }}">
+                <span class="glyphicon glyphicon-user"></span>
+                Nova Marca
+            </a>
+            <a class="btn btn-info" href="{{ path('fabricantes_edit', {'id': fabricante.id}) }}" title="Editar os dados do fabricante">
+                <span class="glyphicon glyphicon-cog"></span>
+                Editar
+            </a>
+            <a href="{{ path('fabricantes_index') }}"  class="btn btn-danger">
+                <span class="glyphicon glyphicon-remove"></span>                
+                Fechar
+            </a>
+        </div>
+        <h2><b>Fabricante #{{ fabricante.id }}</b></h2>
+    </div>    
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Código</th>
+                <td>{{ fabricante.id }}</td>
+            </tr>
+            <tr>
+                <th>Fabricante</th>
+                <td>{{ fabricante.fabricante }}</td>
+            </tr>
+            <tr>
+                <th>Cadastrado por</th>
+                <td>{{ fabricante.usuarioCadastro }}</td>
+            </tr>
+            <tr>
+                <th>Data de Cadastro</th>
+                <td>{% if fabricante.dataCadastro %}{{ fabricante.dataCadastro|date('d/m/Y') }}{% endif %}</td>
+            </tr>
+        </tbody>
+    </table>
+    <div>
+        <h3><b>Marcas</b></h3>
+    </div>
+    <table class="table">
+        <thead>
+             <th>Código</th>
+             <th>Marca</th>             
+             <th>Data de Cadastro</th>
+             <th>Ativo</th>
+             <th>Editar</th>
+        </thead>
+        <tbody>
+            {% for marca in marcas %}
+                <tr>                   
+                    <td>{{ marca.id }}</td>
+                    <td>{{ marca.marca }}</td>                    
+                    <td>
+                        {% if marca.dataCadastro %}{{ marca.dataCadastro|date('d/m/Y') }}{% endif %}
+                    </td>
+                    <td>{% if marca.ativo == 'S' %}
+                            <form class="form-marca-ativo" action=" {{ path('marcas_edit_ativo') }} ">
+                                <input type="hidden" id="id_marca" value="{{ marca.id }}"/>
+                                <input type="hidden" id="marca_ativo" value="{{ marca.ativo }}"/>                                
+                                <button type="submit" class="btn btn-success" id="btn_submit_ativo">
+                                    <span id="span_submit_ativo" class="glyphicon glyphicon-ok"></span>
+                                </button>                                
+                            </form>
+                        {% else %}
+                            <form class="form-marca-ativo" action=" {{ path('marcas_edit_ativo') }} ">
+                                <input type="hidden" id="id_marca" value="{{ marca.id }}"/>
+                                <input type="hidden" id="marca_ativo" value="{{ marca.ativo }}"/>                                
+                                <button type="submit" class="btn btn-danger" id="btn_submit_ativo">
+                                    <span id="span_submit_ativo" class="glyphicon glyphicon-remove"></span>
+                                </button>                                
+                            </form>
+                        {% endif %}
+                    </td>  
+                    <td>
+                        <a class="btn btn-info" href="{{ path('marcas_edit', {'id': marca.id}) }}" title="Editar os dados da marca">
+                            <span class="glyphicon glyphicon-cog"></span>                        
+                        </a>
+                    </td>
+                </tr>
+            {% endfor %} 
+        </tbody>
+    </table>
+    <div>
+        <a href="{{ path('fabricantes_index') }}"  class="btn btn-danger">
+            <span class="glyphicon glyphicon-remove"></span>
+            Fechar
+        </a>
+        <div class="pull-right">
+            <a href="#top" title="Ir para o topo">
+                <span class="glyphicon glyphicon-chevron-up"></span>                
+            </a> 
+        </div>
+        <br><br><br><br>    
+    </div>       
+{% endblock %}

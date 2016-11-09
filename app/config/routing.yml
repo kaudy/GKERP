@@ -1,3 +1,15 @@
+materiais_tipos_unidades:
+    resource: "@MateriaisBundle/Controller/TiposUnidadesController.php"
+    type:     annotation
+
+materiais_categorias_materiais:
+    resource: "@MateriaisBundle/Controller/CategoriasMateriaisController.php"
+    type:     annotation
+
+materiais_tipos_materiais:
+    resource: "@MateriaisBundle/Controller/TiposMateriaisController.php"
+    type:     annotation
+
 app:
     resource: "@AppBundle/Controller/"
     type:     annotation
@@ -16,5 +28,18 @@ cidades:
     resource: "@CidadesBundle/Controller/"
     type:     annotation
     prefix:   /
-
+    
+materiais:
+    resource: "@MateriaisBundle/Controller/"
+    type:     annotation
+    prefix:   /   
+    
+fos_user:
+    resource: "@FOSUserBundle/Resources/config/routing/all.xml"
+    
+fos_user_group:
+    resource: "@FOSUserBundle/Resources/config/routing/group.xml"
+    prefix: /group
+    
+    
 

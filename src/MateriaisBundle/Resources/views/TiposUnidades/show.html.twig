@@ -1,0 +1,44 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Tiposunidade</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ tiposUnidade.id }}</td>
+            </tr>
+            <tr>
+                <th>Unidade</th>
+                <td>{{ tiposUnidade.unidade }}</td>
+            </tr>
+            <tr>
+                <th>Sigla</th>
+                <td>{{ tiposUnidade.sigla }}</td>
+            </tr>
+            <tr>
+                <th>Ativo</th>
+                <td>{{ tiposUnidade.ativo }}</td>
+            </tr>
+            <tr>
+                <th>Datacadastro</th>
+                <td>{% if tiposUnidade.dataCadastro %}{{ tiposUnidade.dataCadastro|date('Y-m-d H:i:s') }}{% endif %}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('tiposunidades_index') }}">Back to the list</a>
+        </li>
+        <li>
+            <a href="{{ path('tiposunidades_edit', { 'id': tiposUnidade.id }) }}">Edit</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}

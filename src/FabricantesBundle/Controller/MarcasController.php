@@ -27,7 +27,7 @@ class MarcasController extends Controller
 
         $marcas = $em->getRepository('FabricantesBundle:Marcas')->findAll();
 
-        return $this->render('marcas/index.html.twig', array(
+        return $this->render('FabricantesBundle:Marcas:index.html.twig', array(
             'marcas' => $marcas,
         ));
     }
@@ -46,8 +46,8 @@ class MarcasController extends Controller
 
         if ($form->isSubmitted() && $form->isValid()) 
         {
-            //usuario fixo - modificar quando implantar controle de usuarios
-            $marca->setUsuarioCadastro(1);
+            //Usuario Logado
+            $marca->setUsuarioCadastro($this->getUser());
             
             //Pega a data e horario atual do cadastro
             $dataAtual = new \DateTime("now");
@@ -60,7 +60,7 @@ class MarcasController extends Controller
             return $this->redirectToRoute('fabricantes_show', array('id' => $marca->getFabricante()->getId()));            
         }
 
-        return $this->render('marcas/new.html.twig', array(
+        return $this->render('FabricantesBundle:Marcas:new.html.twig', array(
             'marca' => $marca,
             'form' => $form->createView(),
             'origem' => 'newAction',
@@ -77,7 +77,7 @@ class MarcasController extends Controller
     {
         $deleteForm = $this->createDeleteForm($marca);
 
-        return $this->render('marcas/show.html.twig', array(
+        return $this->render('FabricantesBundle:Marcas:show.html.twig', array(
             'marca' => $marca,
             'delete_form' => $deleteForm->createView(),
         ));
@@ -101,7 +101,7 @@ class MarcasController extends Controller
             return $this->redirectToRoute('fabricantes_show', array('id' => $marca->getFabricante()->getId()));
         }
 
-        return $this->render('marcas/edit.html.twig', array(
+        return $this->render('FabricantesBundle:Marcas:edit.html.twig', array(
             'marca' => $marca,
             'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
@@ -160,9 +160,9 @@ class MarcasController extends Controller
         if ($form->isSubmitted() && $form->isValid()) 
         {
             //usuario fixo - modificar quando implantar controle de usuarios
-            $marca->setUsuarioCadastro(1);
+            $marca->setUsuarioCadastro($this->getUser());
             
-            //Pega a data e horario atual do cadastro
+            //Usuario Logado
             $dataAtual = new \DateTime("now");
             $marca->setDataCadastro($dataAtual); 
             
@@ -173,13 +173,45 @@ class MarcasController extends Controller
             return $this->redirectToRoute('fabricantes_show', array('id' => $marca->getFabricante()->getId()));
         }
 
-        return $this->render('marcas/new.html.twig', array(
+        return $this->render('FabricantesBundle:Marcas:new.html.twig', array(
             'marca' => $marca,
             'form' => $form->createView(),
             'origem' => 'newWithFabricanteAction',
         ));
     }
     
+    
+    /**
+     * Edita somente o status da marca
+     * Json como parametro
+     *     
+     * @Route("/ativo/", name="marcas_edit_ativo")
+     * @Method({"POST"})
+     */
+    public function editAtivoAction(Request $request)
+    {   
+        $em = $this->getDoctrine()->getManager();
+        $marca = $em->getRepository('FabricantesBundle:Marcas')->find($request->get('id_marca'));
+        
+        $marca_ativo = $request->get('marca_ativo');
+        
+        //Se marca ativo atual for S desativa senao ativa
+        if($marca_ativo == 'S')
+        {
+            $marca_ativo = 'N';
+        }else
+        {
+            $marca_ativo = 'S';
+        }
+        $marca->setAtivo($marca_ativo);
+        $em->flush();
+                
+        $retorno = array(
+            "status" => "ok",
+            "marca_ativo" => $marca_ativo
+        );
+        return $this->json($retorno); 
+    }
     
     
     

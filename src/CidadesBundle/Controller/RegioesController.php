@@ -9,7 +9,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
- * Regio controller.
+ * Regioes controller.
  *
  * @Route("regioes")
  */
@@ -28,7 +28,7 @@ class RegioesController extends Controller
 
         $regioes = $em->getRepository('CidadesBundle:Regioes')->findAll();
 
-        return $this->render('regioes/index.html.twig', array(
+        return $this->render('CidadesBundle:Regioes:index.html.twig', array(
                     'regioes' => $regioes,
         ));
     }
@@ -54,7 +54,7 @@ class RegioesController extends Controller
             return $this->redirectToRoute('regioes_index');
         }
 
-        return $this->render('regioes/new.html.twig', array(
+        return $this->render('CidadesBundle:Regioes:new.html.twig', array(
                     'regioes' => $regioes,
                     'form' => $form->createView(),
         ));
@@ -70,7 +70,7 @@ class RegioesController extends Controller
     {
         $deleteForm = $this->createDeleteForm($regiao);
 
-        return $this->render('regioes/show.html.twig', array(
+        return $this->render('CidadesBundle:Regioes:show.html.twig', array(
                     'regiao' => $regiao,
                     'delete_form' => $deleteForm->createView(),
         ));
@@ -95,7 +95,7 @@ class RegioesController extends Controller
             return $this->redirectToRoute('regioes_index');
         }
 
-        return $this->render('regioes/edit.html.twig', array(
+        return $this->render('CidadesBundle:Regioes:edit.html.twig', array(
                     'regioes' => $regioes,
                     'edit_form' => $editForm->createView(),
                     'delete_form' => $deleteForm->createView(),

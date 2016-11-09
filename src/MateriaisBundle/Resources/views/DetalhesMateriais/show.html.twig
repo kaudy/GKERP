@@ -1,0 +1,127 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div>
+        <div class="pull-right">
+            <a class="btn btn-info" href="{{ path('detalhesmateriais_edit', {'id': detalheMaterial.id}) }}" title="Editar os dados do material">
+                <span class="glyphicon glyphicon-cog"></span>
+                Editar
+            </a>
+            <a href="{{ path('detalhesmateriais_index') }}"  class="btn btn-danger">
+                <span class="glyphicon glyphicon-remove"></span>                
+                Fechar
+            </a>            
+        </div>
+        <h2><b>Material #{{ detalheMaterial.id }}</b></h2>
+    </div>
+    <br>
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Código</th>
+                <td>{{ detalheMaterial.id }}</td>
+            </tr>
+            <tr>
+                <th>Codigo de Barra</th>
+                <td>{{ detalheMaterial.codigoBarra }}</td>
+            </tr>
+            <tr>
+                <th>Material Base</th>
+                <td>{{ detalheMaterial.material }}</td>
+            </tr>
+            <tr>
+                <th>Fabricante / Marca</th>
+                <td>{{ detalheMaterial.marca.fabricante }} / {{ detalheMaterial.marca }} </td>
+            </tr>
+            <tr>
+                <th>Categoria</th>
+                <td>{{ detalheMaterial.categoriaMaterial }}</td>
+            </tr>
+            <tr>
+                <th>Tipo</th>
+                <td>{{ detalheMaterial.tipoMaterial }}</td>
+            </tr>
+            <tr>
+                <th>Tipo Unidade</th>
+                <td>{{ detalheMaterial.tipoUnidade }}</td>
+            </tr>
+            <tr>
+                <th>Unidade(s)</th>
+                <td>{{ detalheMaterial.unidade }}</td>
+            </tr>
+            <tr>
+                <th>Peso Unitário (g)</th>
+                <td>{{ detalheMaterial.pesoUnitario }}</td>
+            </tr>
+            <tr>
+                <th>Peso Total (g)</th>
+                <td>{{ detalheMaterial.pesoTotal }}</td>
+            </tr>
+            <tr>
+                <th>Volume Unitário (ml)</th>
+                <td>{{ detalheMaterial.volumeUnitario }}</td>
+            </tr>
+            <tr>
+                <th>Volume Total (ml)</th>
+                <td>{{ detalheMaterial.volumeTotal }}</td>
+            </tr>            
+            <tr>
+                <th>Modelo</th>
+                <td>{{ detalheMaterial.modelo }}</td>
+            </tr>
+            <tr>
+                <th>Referência do Modelo</th>
+                <td>{{ detalheMaterial.referenciaModelo }}</td>
+            </tr>
+            <tr>
+                <th>Validade Base (Meses)</th>
+                <td>{{ detalheMaterial.validadeBase }}</td>
+            </tr>
+            <tr>
+                <th>Data de Cadastro</th>
+                <td>
+                    {% if detalheMaterial.dataCadastro %}
+                        {{ detalheMaterial.dataCadastro|date('d/m/Y') }}
+                    {% endif %}
+                </td>
+            </tr>
+           <tr>
+                <th>Ativo</th>
+                <td>
+                    {% if detalheMaterial.ativo == 'S' %}
+                        <form class="form-detalhematerial-ativo" action="#">
+                            <input type="hidden" id="id_material" value="{{ detalheMaterial.id }}"/>
+                            <input type="hidden" id="material_ativo" value="{{ detalheMaterial.ativo }}"/>                                
+                            <button type="submit" class="btn btn-success" id="btn_submit_ativo" title="Desativar Material">
+                                <span id="span_submit_ativo" class="glyphicon glyphicon-ok"></span>
+                            </button>                                
+                        </form>
+                    {% else %}
+                        <form class="form-detalhematerial-ativo" action="#">
+                            <input type="hidden" id="id_detalhe_material" value="{{ detalheMaterial.id }}"/>
+                            <input type="hidden" id="detalhematerial_ativo" value="{{ detalheMaterial.ativo }}"/>                                
+                            <button type="submit" class="btn btn-danger" id="btn_submit_ativo" title="Ativar Material">
+                                <span id="span_submit_ativo" class="glyphicon glyphicon-remove"></span>
+                            </button>                                
+                        </form>
+                    {% endif %}
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <div>
+        <a href="{{ path('detalhesmateriais_index') }}"  class="btn btn-danger">
+            <span class="glyphicon glyphicon-remove"></span>
+            Fechar
+        </a>
+        <div class="pull-right">
+            <a href="#top" title="Ir para o topo">
+                <span class="glyphicon glyphicon-chevron-up"></span>                
+            </a> 
+        </div>
+        <br>
+        <br>
+        <br>
+        <br>    
+    </div>
+{% endblock %}

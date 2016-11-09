@@ -28,7 +28,7 @@ class FornecedoresController extends Controller
 
         $fornecedores = $em->getRepository('FornecedoresBundle:Fornecedores')->findAll();
 
-        return $this->render('fornecedores/index.html.twig', array(
+        return $this->render('FornecedoresBundle:Fornecedores:index.html.twig', array(
             'fornecedores' => $fornecedores,
         ));
     }
@@ -59,7 +59,7 @@ class FornecedoresController extends Controller
             return $this->redirectToRoute('fornecedores_show', array('id' => $fornecedor->getId()));
         }
 
-        return $this->render('fornecedores/new.html.twig', array(
+        return $this->render('FornecedoresBundle:Fornecedores:new.html.twig', array(
             'fornecedor' => $fornecedor,
             'form' => $form->createView(),
         ));
@@ -81,7 +81,7 @@ class FornecedoresController extends Controller
                                 ->findBy(array('fornecedor' => $fornecedor));
 
         
-        return $this->render('fornecedores/show.html.twig', array(
+        return $this->render('FornecedoresBundle:Fornecedores:show.html.twig', array(
             'fornecedor' => $fornecedor,
             'contatosFornecedores' => $contatosFornecedores,
             'delete_form' => $deleteForm->createView(),
@@ -106,7 +106,7 @@ class FornecedoresController extends Controller
             return $this->redirectToRoute('fornecedores_edit', array('id' => $fornecedore->getId()));
         }
 
-        return $this->render('fornecedores/edit.html.twig', array(
+        return $this->render('FornecedoresBundle:Fornecedores:edit.html.twig', array(
             'fornecedore' => $fornecedore,
             'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),

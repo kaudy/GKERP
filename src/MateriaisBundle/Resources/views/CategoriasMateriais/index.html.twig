@@ -1,0 +1,58 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div>
+        <div class="pull-right">
+            <a class="btn btn-primary" href="{{ path('categoriasmateriais_new') }}" title="Cadastrar novo tipo de material">
+                <span class="glyphicon glyphicon-plus"></span>
+                Novo Categoria de Material
+            </a>   
+        </div>
+        <h2>Categorias de Materiais</h2>         
+    </div>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Código</th>
+                <th>Categoria</th>                
+                <th>Data de Cadastro</th>
+                <th>Ativo</th>
+                <th>Editar</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for categoriaMaterial in categoriasMateriais %}
+            <tr>
+                <td><a href="{{ path('categoriasmateriais_show', { 'id': categoriaMaterial.id }) }}">{{ categoriaMaterial.id }}</a></td>
+                <td>{{ categoriaMaterial.categoriaMaterial }}</td>                
+                <td>{% if categoriaMaterial.dataCadastro %}{{ categoriaMaterial.dataCadastro|date('d/m/Y') }}{% endif %}</td>
+                <td>
+                    {% if categoriaMaterial.ativo == 'S' %}
+                        <form class="form-categoriamaterial-ativo" action="#">
+                            <input type="hidden" id="id_categoria_material" value="{{ categoriaMaterial.id }}"/>
+                            <input type="hidden" id="categoria_material_ativo" value="{{ categoriaMaterial.ativo }}"/>                                
+                            <button type="submit" class="btn btn-success" id="btn_submit_ativo" title="Desativar Categoria de Material">
+                                <span id="span_submit_ativo" class="glyphicon glyphicon-ok"></span>
+                            </button>                                
+                        </form>
+                    {% else %}
+                        <form class="form-categoriamaterial-ativo" action="#">
+                            <input type="hidden" id="id_categoria_material" value="{{ categoriaMaterial.id }}"/>
+                            <input type="hidden" id="categoria_material_ativo" value="{{ categoriaMaterial.ativo }}"/>                                
+                            <button type="submit" class="btn btn-danger" id="btn_submit_ativo" title="Ativar Categoria de Material">
+                                <span id="span_submit_ativo" class="glyphicon glyphicon-remove"></span>
+                            </button>                                
+                        </form>
+                    {% endif %}
+                </td>
+                <td>
+                    <a class="btn btn-info" href="{{ path('categoriasmateriais_edit', {'id': categoriaMaterial.id}) }}" title="Editar Categoria">
+                        <span class="glyphicon glyphicon-cog"></span>
+                    </a>                    
+                </td>                
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

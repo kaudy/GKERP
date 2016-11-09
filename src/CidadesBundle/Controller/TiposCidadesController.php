@@ -26,7 +26,7 @@ class TiposCidadesController extends Controller
 
         $tiposCidades = $em->getRepository('CidadesBundle:TiposCidades')->findAll();
 
-        return $this->render('tiposcidades/index.html.twig', array(
+        return $this->render('CidadesBundle:TiposCidades:index.html.twig', array(
             'tiposCidades' => $tiposCidades,
         ));
     }
@@ -51,7 +51,7 @@ class TiposCidadesController extends Controller
             return $this->redirectToRoute('tiposcidades_index');
         }
 
-        return $this->render('tiposcidades/new.html.twig', array(
+        return $this->render('CidadesBundle:TiposCidades:new.html.twig', array(
             'tiposCidade' => $tiposCidade,
             'form' => $form->createView(),
         ));
@@ -67,7 +67,7 @@ class TiposCidadesController extends Controller
     {
         $deleteForm = $this->createDeleteForm($tiposCidade);
 
-        return $this->render('tiposcidades/show.html.twig', array(
+        return $this->render('CidadesBundle:TiposCidades:show.html.twig', array(
             'tiposCidade' => $tiposCidade,
             'delete_form' => $deleteForm->createView(),
         ));
@@ -91,7 +91,7 @@ class TiposCidadesController extends Controller
             return $this->redirectToRoute('tiposcidades_index');
         }
 
-        return $this->render('tiposcidades/edit.html.twig', array(
+        return $this->render('CidadesBundle:TiposCidades:edit.html.twig', array(
             'tiposCidade' => $tiposCidade,
             'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),

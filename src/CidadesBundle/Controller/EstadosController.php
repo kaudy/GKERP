@@ -26,7 +26,7 @@ class EstadosController extends Controller
 
         $estados = $em->getRepository('CidadesBundle:Estados')->findAll();
 
-        return $this->render('estados/index.html.twig', array(
+        return $this->render('CidadesBundle:Estados:index.html.twig', array(
             'estados' => $estados,
         ));
     }
@@ -51,7 +51,7 @@ class EstadosController extends Controller
             return $this->redirectToRoute('estados_index');
         }
 
-        return $this->render('estados/new.html.twig', array(
+        return $this->render('CidadesBundle:Estados:new.html.twig', array(
             'estado' => $estado,
             'form' => $form->createView(),
         ));
@@ -67,7 +67,7 @@ class EstadosController extends Controller
     {
         $deleteForm = $this->createDeleteForm($estado);
 
-        return $this->render('estados/show.html.twig', array(
+        return $this->render('CidadesBundle:Estados:show.html.twig', array(
             'estado' => $estado,
             'delete_form' => $deleteForm->createView(),
         ));
@@ -91,7 +91,7 @@ class EstadosController extends Controller
             return $this->redirectToRoute('estados_index');
         }
 
-        return $this->render('estados/edit.html.twig', array(
+        return $this->render('CidadesBundle:Estados:edit.html.twig', array(
             'estado' => $estado,
             'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),

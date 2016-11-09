@@ -33,12 +33,11 @@ class Marcas
      * @ORM\Column(name="marca", type="string", length=100, unique=true)
      */
     private $marca;
-
+    
     /**
-     * @var int
-     *
-     * @ORM\Column(name="id_usuario_cadastro", type="integer")
-     */        
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Usuarios")
+     * @ORM\JoinColumn(name="id_usuario_cadastro", referencedColumnName="id")
+     */
     private $usuarioCadastro;
 
     /**
@@ -117,11 +116,11 @@ class Marcas
     /**
      * Set usuarioCadastro
      *
-     * @param integer $usuarioCadastro
+     * @param @param \AppBundle\Entity\Usuarios $usuarioCadastro
      *
      * @return Marcas
      */
-    public function setUsuarioCadastro($usuarioCadastro)
+    public function setUsuarioCadastro(\AppBundle\Entity\Usuarios $usuarioCadastro = null)
     {
         $this->usuarioCadastro = $usuarioCadastro;
 
@@ -131,7 +130,7 @@ class Marcas
     /**
      * Get usuarioCadastro
      *
-     * @return int
+     * @return \AppBundle\Entity\Usuarios
      */
     public function getUsuarioCadastro()
     {
@@ -186,6 +185,10 @@ class Marcas
         return $this->ativo;
     }
     
+    public function __toString()
+    {
+        return $this->marca;
+    }
     
     
     

@@ -15,7 +15,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;use Symfony\Component
 class CidadesController extends Controller
 {
     /**
-     * Lists all cidade entities.
+     * Lists all cidades entities.
      *
      * @Route("/", name="cidades_index")
      * @Method("GET")
@@ -26,7 +26,7 @@ class CidadesController extends Controller
 
         $cidades = $em->getRepository('CidadesBundle:Cidades')->findAll();
 
-        return $this->render('cidades/index.html.twig', array(
+        return $this->render('CidadesBundle:Cidades:index.html.twig', array(
             'cidades' => $cidades,
         ));
     }
@@ -52,7 +52,7 @@ class CidadesController extends Controller
             return $this->redirectToRoute('cidades_index');
         }
 
-        return $this->render('cidades/new.html.twig', array(
+        return $this->render('CidadesBundle:Cidades:new.html.twig', array(
             'cidade' => $cidade,
             'form' => $form->createView(),
         ));
@@ -68,7 +68,7 @@ class CidadesController extends Controller
     {
         $deleteForm = $this->createDeleteForm($cidade);
 
-        return $this->render('cidades/show.html.twig', array(
+        return $this->render('CidadesBundle:Cidades:show.html.twig', array(
             'cidade' => $cidade,
             'delete_form' => $deleteForm->createView(),
         ));
@@ -92,7 +92,7 @@ class CidadesController extends Controller
             return $this->redirectToRoute('cidades_index');
         }
 
-        return $this->render('cidades/edit.html.twig', array(
+        return $this->render('CidadesBundle:Cidades:edit.html.twig', array(
             'cidade' => $cidade,
             'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),

@@ -9,7 +9,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
- * Fabricante controller.
+ * Fabricantes controller.
  *
  * @Route("fabricantes")
  */
@@ -17,7 +17,7 @@ class FabricantesController extends Controller
 {
 
     /**
-     * Lists all fabricante entities.
+     * Lists all fabricantes entities.
      *
      * @Route("/", name="fabricantes_index")
      * @Method("GET")
@@ -28,7 +28,7 @@ class FabricantesController extends Controller
 
         $fabricantes = $em->getRepository('FabricantesBundle:Fabricantes')->findAll();
 
-        return $this->render('fabricantes/index.html.twig', array(
+        return $this->render('FabricantesBundle:Fabricantes:index.html.twig', array(
                     'fabricantes' => $fabricantes,
         ));
     }
@@ -47,13 +47,14 @@ class FabricantesController extends Controller
 
         if ($form->isSubmitted() && $form->isValid())
         {
-            //usuario fixo - modificar quando implantar controle de usuarios
-            $fabricante->setUsuarioCadastro(1);
+            //Usuario Logado
+            $fabricante->setUsuarioCadastro($this->getUser()); 
             
             //Pega a data e horario atual do cadastro
             $dataAtual = new \DateTime("now");
             $fabricante->setDataCadastro($dataAtual);
             
+            //Persiste o fabricante na base de dados
             $em = $this->getDoctrine()->getManager();
             $em->persist($fabricante);
             $em->flush($fabricante);
@@ -61,7 +62,7 @@ class FabricantesController extends Controller
             return $this->redirectToRoute('fabricantes_show', array('id' => $fabricante->getId()));
         }
 
-        return $this->render('fabricantes/new.html.twig', array(
+        return $this->render('FabricantesBundle:Fabricantes:new.html.twig', array(
                     'fabricante' => $fabricante,
                     'form' => $form->createView(),
         ));
@@ -82,7 +83,7 @@ class FabricantesController extends Controller
         $marcas = $em->getRepository('FabricantesBundle:Marcas')
                 ->findBy(array('fabricante' => $fabricante));
 
-        return $this->render('fabricantes/show.html.twig', array(
+        return $this->render('FabricantesBundle:Fabricantes:show.html.twig', array(
                     'fabricante' => $fabricante,
                     'marcas' => $marcas,
                     'delete_form' => $deleteForm->createView(),
@@ -108,7 +109,7 @@ class FabricantesController extends Controller
             return $this->redirectToRoute('fabricantes_show', array('id' => $fabricante->getId()));
         }
 
-        return $this->render('fabricantes/edit.html.twig', array(
+        return $this->render('FabricantesBundle:Fabricantes:edit.html.twig', array(
                     'fabricante' => $fabricante,
                     'edit_form' => $editForm->createView(),
                     'delete_form' => $deleteForm->createView(),

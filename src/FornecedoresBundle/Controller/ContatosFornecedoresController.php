@@ -27,7 +27,7 @@ class ContatosFornecedoresController extends Controller
 
         $contatosFornecedores = $em->getRepository('FornecedoresBundle:ContatosFornecedores')->findAll();
 
-        return $this->render('contatosfornecedores/index.html.twig', array(
+        return $this->render('FornecedoresBundle:ContatosFornecedores:index.html.twig', array(
             'contatosFornecedores' => $contatosFornecedores,
         ));
     }
@@ -60,7 +60,7 @@ class ContatosFornecedoresController extends Controller
             return $this->redirectToRoute('fornecedores_show', array('id' => $contatosFornecedor->getFornecedor()->getId()));
         }
 
-        return $this->render('contatosfornecedores/new.html.twig', array(
+        return $this->render('FornecedoresBundle:ContatosFornecedores:new.html.twig', array(
             'contatoFornecedor' => $contatoFornecedor,
             'form' => $form->createView(),
             'origem' => 'newAction',
@@ -77,7 +77,7 @@ class ContatosFornecedoresController extends Controller
     {
         $deleteForm = $this->createDeleteForm($contatosFornecedore);
 
-        return $this->render('contatosfornecedores/show.html.twig', array(
+        return $this->render('FornecedoresBundle:ContatosFornecedores:show.html.twig', array(
             'contatosFornecedore' => $contatosFornecedore,
             'delete_form' => $deleteForm->createView(),
         ));
@@ -101,7 +101,7 @@ class ContatosFornecedoresController extends Controller
             return $this->redirectToRoute('fornecedores_show', array('id' => $contatosFornecedor->getFornecedor()->getId()));
         }
 
-        return $this->render('contatosfornecedores/edit.html.twig', array(
+        return $this->render('FornecedoresBundle:ContatosFornecedores:edit.html.twig', array(
             'contatosFornecedor' => $contatosFornecedor,
             'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
@@ -174,7 +174,7 @@ class ContatosFornecedoresController extends Controller
             return $this->redirectToRoute('fornecedores_show', array('id' => $contatosFornecedor->getFornecedor()->getId()));
         }
 
-        return $this->render('contatosfornecedores/new.html.twig', array(
+        return $this->render('FornecedoresBundle:ContatosFornecedores:new.html.twig', array(
             'contatoFornecedor' => $contatoFornecedor,
             'form' => $form->createView(),
             'origem' => 'newWithFornecedorAction',

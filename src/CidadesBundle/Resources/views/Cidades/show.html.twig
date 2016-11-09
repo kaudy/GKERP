@@ -1,0 +1,66 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+    <div>
+        <div class="pull-right">
+            <a class="btn btn-info" href="{{ path('cidades_edit', {'id': cidade.id}) }}" title="Editar os dados do material">
+                <span class="glyphicon glyphicon-cog"></span>
+                Editar
+            </a>
+            <a href="{{ path('cidades_index') }}"  class="btn btn-danger">
+                <span class="glyphicon glyphicon-remove"></span>                
+                Fechar
+            </a>            
+        </div>
+        <h2><b>Cidade #{{ cidade.id }}</b></h2>        
+    </div>
+    <br>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Código</th>
+                <th>Cidade</th>
+                <th>Estado</th>  
+                <th>UF</th>
+                <th>Região</th>
+                <th>Tipo</th>                
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>                   
+                    {{ cidade.id }}                    
+                </td>
+                <td>
+                    {{ cidade.cidade|upper }}
+                </td>
+                <td>
+                    {{ cidade.idEstado }}
+                </td>  
+                <td>
+                    {{ cidade.idEstado.uf }}
+                </td>
+                <td>
+                    {{ cidade.idEstado.idRegiao }}
+                </td>
+                <td>
+                    {{ cidade.idTipoCidade }}
+                </td>                  
+            </tr>           
+        </tbody>
+    </table>
+   <div>
+        <a href="{{ path('cidades_index') }}"  class="btn btn-danger">
+            <span class="glyphicon glyphicon-remove"></span>
+            Fechar
+        </a>
+        <div class="pull-right">
+            <a href="#top" title="Ir para o topo">
+                <span class="glyphicon glyphicon-chevron-up"></span>                
+            </a> 
+        </div>
+        <br>
+        <br>
+        <br>
+        <br>    
+    </div>
+{% endblock %}

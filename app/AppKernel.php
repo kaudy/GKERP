@@ -18,7 +18,9 @@ class AppKernel extends Kernel
             new AppBundle\AppBundle(),
             new CidadesBundle\CidadesBundle(),
             new FornecedoresBundle\FornecedoresBundle(),
-            new FabricantesBundle\FabricantesBundle(),            
+            new FabricantesBundle\FabricantesBundle(),
+            new FOS\UserBundle\FOSUserBundle(),
+            new MateriaisBundle\MateriaisBundle(),
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {
