@@ -27,6 +27,7 @@ class DetalhesMateriaisType extends AbstractType
                 ->add('validadeBase')
                 ->add('modelo')
                 ->add('referenciaModelo')
+                ->add('descricao')
                 ->add('ativo',ChoiceType::class, array(
                     'choices' => array(
                         'Sim' => 'S',

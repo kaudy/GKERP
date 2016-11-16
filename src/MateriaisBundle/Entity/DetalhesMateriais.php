@@ -104,6 +104,15 @@ class DetalhesMateriais
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Usuarios")
      * @ORM\JoinColumn(name="id_usuario_cadastro", referencedColumnName="id")
      */
+    
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="descricao", type="string", length=200, nullable=true)
+     */
+    private $descricao;
+    
+    
     private $usuarioCadastro;
 
     /**
@@ -490,6 +499,32 @@ class DetalhesMateriais
     {
         return $this->ativo;
     }
+        
+    
+    /**
+     * Set descricao
+     *
+     * @param string $descricao
+     *
+     * @return DetalhesMateriais
+     */
+    public function getDescricao()
+    {
+        return $this->descricao;
+    }
+
+    /**
+     * Get descricao
+     *
+     * @return string
+     */
+    public function setDescricao($descricao)
+    {
+        $this->descricao = $descricao;
+        return $this;
+    }
+
+        
     
     /***********************************************************************************************
      * Retorna o total de peso das unidades
